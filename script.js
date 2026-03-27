@@ -383,38 +383,98 @@ function renderPortfolio() {
 //     });
 // });
 
+// document.addEventListener('DOMContentLoaded', () => {
+
+//     // Render semua konten terlebih dahulu
+//     if (typeof renderExperience === "function") renderExperience();
+//     if (typeof renderEducation === "function") renderEducation();
+//     if (typeof renderSkills === "function") renderSkills();
+//     if (typeof renderPortfolio === "function") renderPortfolio();
+//     if (typeof renderSoftSkills === "function") renderSoftSkills();
+//     if (typeof renderLanguages === "function") renderLanguages();
+
+//     // Pastikan selektor menggunakan CLASS, bukan ID yang tidak ada
+//     const tabBtns = document.querySelectorAll('.tab-btn');
+//     const panels = document.querySelectorAll('.content-panel');
+
+    
+//     if (tabBtns.length > 0) {
+//         tabBtns.forEach(btn => {
+//             btn.addEventListener('click', () => {
+//                 const targetId = btn.getAttribute('data-target');
+
+//                 // Update button active state
+//                 tabBtns.forEach(t => t.classList.remove('active'));
+//                 btn.classList.add('active');
+
+//                 // Switch panels
+//                 panels.forEach(panel => {
+//                     if (panel.id === targetId) {
+//                         panel.style.display = 'block';
+//                     } else {
+//                         panel.style.display = 'none';
+//                     }
+//                 });
+//             });
+//         });
+//     }
+// });
+
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Jalankan semua fungsi render terlebih dahulu
+    renderExperience();
+    renderEducation();
+    renderSkills();
+    renderPortfolio(); // Pastikan kartu portfolio sudah ada di DOM
+    renderSoftSkills();
+    renderLanguages();
 
-    // Render semua konten terlebih dahulu
-    if (typeof renderExperience === "function") renderExperience();
-    if (typeof renderEducation === "function") renderEducation();
-    if (typeof renderSkills === "function") renderSkills();
-    if (typeof renderPortfolio === "function") renderPortfolio();
-    if (typeof renderSoftSkills === "function") renderSoftSkills();
-    if (typeof renderLanguages === "function") renderLanguages();
+    // 2. Inisialisasi Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // A. Update status tombol aktif
+            filterBtns.forEach(f => f.classList.remove('active'));
+            btn.classList.add('active');
 
-    // Pastikan selektor menggunakan CLASS, bukan ID yang tidak ada
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const panels = document.querySelectorAll('.content-panel');
+            // B. Ambil nilai filter (analytics, ml, atau all)
+            const filterValue = btn.getAttribute('data-filter');
 
-    if (tabBtns.length > 0) {
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetId = btn.getAttribute('data-target');
+            // C. Ambil semua kartu (Harus diseleksi di dalam event click 
+            // agar mendapatkan elemen terbaru hasil render JS)
+            const portfolioCards = document.querySelectorAll('.project-card');
 
-                // Update button active state
-                tabBtns.forEach(t => t.classList.remove('active'));
-                btn.classList.add('active');
-
-                // Switch panels
-                panels.forEach(panel => {
-                    if (panel.id === targetId) {
-                        panel.style.display = 'block';
-                    } else {
-                        panel.style.display = 'none';
-                    }
-                });
+            portfolioCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                
+                if (filterValue === 'all') {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.4s ease forwards';
+                } else if (category && category.includes(filterValue)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.4s ease forwards';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         });
-    }
+    });
+
+    // 3. Logika Tab Navigation (Tetap dipertahankan)
+    const tabBtns = document.querySelectorAll('.tab-btn[data-target]');
+    const panels = document.querySelectorAll('.content-panel');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-target');
+            
+            tabBtns.forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+
+            panels.forEach(panel => {
+                panel.style.display = panel.id === targetId ? 'block' : 'none';
+            });
+        });
+    });
 });
