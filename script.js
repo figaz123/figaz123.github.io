@@ -59,7 +59,7 @@ const educationData = [
         degree: "Data Analytics Bootcamp",
         institution: "RevoU",
         date: "Oct, 2025 - Feb, 2026",
-        description: "Intensive 13-week program covering end-to-end data analytics including SQL, Python, Data Visualization, and Statistics."
+        description: "Intensive program covering business problem framing, statistical analysis, A/B testing, and applied analytics using SQL,Python, and Scikit-learn to generate data-driven insights."
     },
     {
         degree: "Bachelor of Electrical Engineering",
@@ -138,12 +138,12 @@ const portfolioData = [
             "Recommendations": "Restructured carrier SLAs and halted 'First Class' mode to stabilize service quality and regain $2.15M."
         },
         links: [
-            { url: "#", icon: "fa-solid fa-code", text: "Google Colab", type: "btn-outline" },
+            { url: "https://colab.research.google.com/drive/1O0I8bCeEYxkc7ysfu-Pq4Iq_DRvLqxzT?usp=sharing", icon: "fa-solid fa-code", text: "Google Colab", type: "btn-outline" },
             { url: "https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/view?usp=sharing", icon: "fa-solid fa-chart-simple", text: "Presentation", type: "btn-solid" }
         ],
-        // embedUrl: "https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/preview?usp=sharing" // Contoh embed Google Drive
         embedUrl: "https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/preview?usp=sharing"
     },
+
     {
         category: "analytics",
         icon: "fa-users-viewfinder",
@@ -158,9 +158,10 @@ const portfolioData = [
             "Recommendations": "Implement targeted marketing strategies to increase credit card usage across the 3 identified segments."
         },
         links: [
-            { url: "#", icon: "fa-solid fa-code", text: "GitHub", type: "btn-outline" },
-            { url: "#", icon: "fa-solid fa-file-lines", text: "Tableau", type: "btn-solid" }
-        ]
+            { url: "https://colab.research.google.com/drive/17EII1dfiRRdfqLaZIDRXCtnUdmZPm_LQ?usp=sharing", icon: "fa-solid fa-code", text: "colab", type: "btn-outline" },
+            { url: "https://docs.google.com/presentation/d/16bQsqFRamsZNwRzbryHx8TRkk-p_Vp0xSYKB0HADFsA/edit?usp=sharing", icon: "fa-solid fa-file-lines", text: "powerpoint", type: "btn-solid" }
+        ],
+        embedUrl: "https://docs.google.com/presentation/d/16bQsqFRamsZNwRzbryHx8TRkk-p_Vp0xSYKB0HADFsA/preview?usp=sharing"
     },
     {
         category: "ml",
@@ -176,9 +177,11 @@ const portfolioData = [
             "Recommendations": "Deploy radar-based systems in healthcare facilities as a non-intrusive alternative to traditional surveillance."
         },
         links: [
-            { url: "#", icon: "fa-solid fa-code", text: "Code", type: "btn-outline" },
-            { url: "#", icon: "fa-solid fa-file-pdf", text: "Publication", type: "btn-solid" }
-        ]
+            { url: "https://canva.link/swnp1t2d1twkf5e", icon: "fa-solid fa-code", text: "Presentation", type: "btn-outline" },
+            { url: "https://drive.google.com/file/d/1UGs0D_newuhYqlSaJP314-LnuzEXgex_/view?usp=sharing", icon: "fa-solid fa-file-lines", text: "Paper", type: "btn-solid" },
+            { url: "https://www.dgip.go.id/uploads/berita_resmi/file/f0e5f649d9ca4397d231f93a463a01e3.pdf", icon: "fa-solid fa-file-pdf", text: "Patent", type: "btn-solid" }
+        ],
+        embedUrl: "https://canva.link/swnp1t2d1twkf5e"
     }
 ];
 
