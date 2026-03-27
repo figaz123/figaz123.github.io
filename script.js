@@ -173,8 +173,8 @@ const portfolioData = [
         details: {
             "Objective": "Detect elderly fall events without camera-based surveillance to preserve user privacy.",
             "Methodology": "Processed FMCW radar signals using FFT/STFT and developed a classification model using LSTM (TensorFlow/Keras).",
-            "Key Findings": "Achieved 97% detection accuracy for fall and non-fall classes through time-series modeling.",
-            "Recommendations": "Deploy radar-based systems in healthcare facilities as a non-intrusive alternative to traditional surveillance."
+            "Key Findings": "Achieved 97% detection accuracy for fall and non-fall classes through classification.",
+            "Recommendations": "Deploy radar-based systems in private settings as a non-intrusive alternative to traditional surveillance."
         },
         links: [
             { url: "https://canva.link/swnp1t2d1twkf5e", icon: "fa-solid fa-code", text: "Presentation", type: "btn-outline" },
