@@ -59,12 +59,14 @@ const educationData = [
         degree: "Data Analytics Bootcamp",
         institution: "RevoU",
         date: "Oct, 2025 - Feb, 2026",
+        score: "",
         description: "Intensive program covering business problem framing, statistical analysis, A/B testing, and applied analytics using SQL,Python, and Scikit-learn to generate data-driven insights."
     },
     {
         degree: "Bachelor of Electrical Engineering",
         institution: "Telkom University",
-        date: "GPA: 3.45 / 4.00",
+        date: "Aug, 2019 - Aug, 2023",
+        score: "GPA: 3.45 / 4.00",
         description: "<strong>Thesis:</strong> \"Machine Learning Based Elderly-Fall Detection Using FMCW Radar\""
     }
 ];
@@ -219,6 +221,7 @@ function renderEducation() {
                 <span class="date mono" style="white-space: nowrap; text-align: right;">${edu.date}</span>
             </div>
             <p class="company" style="margin-top: 4px; font-weight: 500;">${edu.institution}</p>
+            <p class="gpa" style="margin-top: 4px; font-weight: 500;">${edu.score}</p>
 
             ${edu.description ? `<p class="mt-2 text-justify">${edu.description}</p>` : ''}
         </div>

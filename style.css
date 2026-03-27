@@ -442,6 +442,11 @@ a {
     font-weight: 500;
     font-size: 0.95rem;
 }
+.gpa {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
 
 /* .date { background: var(--bg-base); padding: 4px 10px; border-radius: 999px; font-size: 0.8rem; color: var(--text-secondary); } */
 
