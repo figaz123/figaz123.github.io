@@ -3,105 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Figo Azzam De Fitrah - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Figo Azzam De Fitrah — Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        
-        <header class="main-header">
-            <h1>WELCOME TO FIGO'S PORTFOLIO!</h1>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
+    <div class="site-wrapper">
+
+        <header class="site-header">
+            <div class="header-eyebrow">
+                <span class="eyebrow-tag"><i class="fa-solid fa-circle-dot pulse-dot"></i> Available for Work</span>
+                <span class="eyebrow-divider">·</span>
+                <span class="eyebrow-mono">Bogor, Indonesia</span>
+            </div>
+            <h1 class="header-title">Welcome to My <span class="header-accent">Data Analytics Portfolio</span></h1>
+            <p class="header-sub">Turning complex datasets into confident business decisions.</p>
         </header>
 
-        <nav class="top-nav">
-            <div class="nav-box about-tab">ABOUT ME</div>
-            <div class="nav-box tab-btn active" id="tab-exp">EXPERIENCE SECTIONS</div>
-            <div class="nav-box tab-btn" id="tab-port">PORTFOLIO SECTIONS</div>
+        <nav class="tab-nav" id="tab-nav" role="tablist">
+            <div class="tab-nav-inner">
+                <button class="tab-btn active" data-target="experience-section" role="tab" aria-selected="true">
+                    <span class="tab-index mono">01</span>
+                    <span class="tab-label">Experience</span>
+                </button>
+                <button class="tab-btn" data-target="education-section" role="tab" aria-selected="false">
+                    <span class="tab-index mono">02</span>
+                    <span class="tab-label">Education & Skills</span>
+                </button>
+                <button class="tab-btn" data-target="portfolio-section" role="tab" aria-selected="false">
+                    <span class="tab-index mono">03</span>
+                    <span class="tab-label">Portfolio</span>
+                </button>
+            </div>
         </nav>
 
         <main class="content-grid">
-            
-            <aside class="profile-section section-dark">
-                <h2>( PROFILE )</h2>
-                <img src="./photo/Foto 3x4.jpg" alt="Figo Azzam Profile Photo" class="profile-photo">
-                
-                <h3>Figo Azzam De Fitrah</h3>
-                <p class="subtitle">| Aspiring Data Analyst | Electrical Engineer Graduates | Project Control |</p>
-                <div class="contact-info">
-                    <a href="mailto:figoazzam.work@gmail.com">figoazzam.work@gmail.com</a><br>
-                    <a href="https://github.com/figaz123" target="_blank">github.com/figaz123</a><br>
-                    Bogor, Indonesia
-                </div>
 
-                <p class="bio-text">
-                    I am an aspiring Data Analyst with an Engineering background prioritizing evidence-based problem solving. Leveraging systematic thinking, I successfully drove a 20% efficiency increase in operator and maintenance assessments at Pupuk Indonesia. I possess strong technical proficiency in Python, Machine Learning, and SQL, allowing me to translate complex data into clear, actionable insights.
-                </p>
+            <aside class="sidebar" aria-label="Profile">
+                <div class="sidebar-inner">
+                    <div class="profile-photo-wrap">
+                        <img src="./photo/Foto 3x4.jpg" alt="Figo Azzam De Fitrah" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="profile-photo-fallback" style="display:none"><i class="fa-solid fa-user"></i></div>
+                    </div>
+
+                    <div class="profile-name-block">
+                        <h2 class="profile-name">Figo Azzam De Fitrah </h2>
+                        <p class="profile-role mono">Data-Driven Professional | Python, SQL, Analytics & Machine Learning</p>
+                    </div>
+
+                    <div class="profile-desc text-justify">I am a data-oriented professional with a background in project management and research, specializing in evidence-based problem-solving. Previously, I analyzed operator assessment data to expose bottlenecks, increasing workforce efficiency by 20%. Currently completing the RevoU Data Analytics Bootcamp, I combine SQL, Python, machine learning, and BI tools to preprocess complex datasets and deliver clean, actionable insights. I aim to apply my operational awareness and systematic thinking to a Data Analyst role, ensuring data consistently drives confident business decisions.</div>
+                    
+                    <div class="sidebar-divider"></div>
+                    
+                    <div class="profile-cta">
+                        <a href="https://docs.google.com/document/d/1sXdS9LCnjJFs9r8lD8Zs5CbBLmjLP8wKr8SCxG2saPc/export?format=pdf" target="_blank" class="btn-primary-cta">
+                            <i class="fa-solid fa-file-arrow-down"></i> Download My CV
+                        </a>
+                    </div>
+
+                    <div class="sidebar-divider"></div>
+
+                    <div class="contact-block">
+                        <h3 class="sidebar-section-label mono">// Contact</h3>
+                        <ul class="contact-list">
+                            <li><i class="fa-solid fa-envelope contact-icon"></i> <a href="mailto:figoazzamdefitrah@gmail.com">figoazzamdefitrah@gmail.com</a></li>
+                            <li><i class="fa-brands fa-linkedin contact-icon"></i> <a href="https://www.linkedin.com/in/figoazzamdefitrah/" target="_blank">LinkedIn: Figo Azzam De Fitrah</a></li>
+                            <li><i class="fa-brands fa-github contact-icon"></i> <a href="https://github.com/figaz123" target="_blank">GitHub: figaz123</a></li>
+                            <li><i class="fa-solid fa-location-dot contact-icon"></i> <span>Bogor, Indonesia</span></li>
+                        </ul>
+                    </div>
+                </div>
             </aside>
 
-            <div class="dynamic-content">
-                
-                <section id="experience-section" class="content-container">
-                    <h2 class="section-title">EXPERIENCE</h2>
-                    
-                    <div class="card section-dark">
-                        <h3>Production Workforce Development Team</h3>
-                        <h4>PT Pupuk Indonesia | Aug 2024 - Present</h4>
-                        <p>Developed a knowledge management system improving preservation effectiveness by ~20%. Analyzed operator and maintenance assessment data, streamlining evaluation workflows and improving efficiency in obtaining results by 20% by identifying process bottlenecks.</p>
-                    </div>
+            <div class="content-area">
 
-                    <div class="card section-dark">
-                        <h3>Full-Stack Data Analytics</h3>
-                        <h4>RevoU | Oct 2025 - Feb 2026</h4>
-                        <p>Mastered problem definition and project scoping. Applied descriptive and inferential statistics to interpret complex datasets. Developed practical skills in experimental design, A/B testing, and built predictive machine learning models using Python and SQL.</p>
-                    </div>
-
-                    <div class="card section-dark">
-                        <h3>Resident AI Engineer (Part-time)</h3>
-                        <h4>Pukul Enam | Dec 2023 - Dec 2024</h4>
-                        <p>Developed and implemented machine learning and deep learning models to solve client-specific problems. Processed and validated datasets for ML pipelines, ensuring high data integrity.</p>
-                    </div>
-
-                    <div class="card section-dark">
-                        <h3>Research Assistant (Human Activity Recognition)</h3>
-                        <h4>Telkom University | Aug 2022 - Aug 2023</h4>
-                        <p>Conducted research utilizing FMCW radar and ML algorithms. Designed signal-processing-based data preprocessing pipelines, optimizing time-frequency representations to improve feature quality.</p>
-                    </div>
+                <section id="experience-section" class="content-panel active" role="tabpanel">
+                    <h2 class="section-title">Work Experience</h2>
+                    <div id="experience-container" class="timeline"></div>
                 </section>
 
-                <section id="portfolio-section" class="content-container" style="display: none;">
-                    <h2 class="section-title">PORTFOLIO & RESEARCH</h2>
-                    
-                    <div class="portfolio-grid">
-                        
-                        <div class="card section-dark portfolio-card">
-                            <div class="card-thumbnail">
-                                <img src="./photo/supply_chain.png" alt="Supply Chain Dashboard" class="thumbnail-img">
-                            </div>
-                            <h3>Optimizing Supply Chain Reliability</h3>
-                            <div class="card-tags">[ Python ] [ Machine Learning ] [ Data Analytics ]</div>
-                            <p>End-to-End Analysis for NextHub Logistics. Developed a predictive Machine Learning model (Random Forest & Deep Learning) achieving a 69.1% Recall Score in identifying potential delivery delays. Formulated strategies proposing carrier SLA restructuring aiming to recover $2.15M in annual revenue.</p>
-                            <div class="card-buttons">
-                                <a href="https://colab.research.google.com/drive/1O0I8bCeEYxkc7ysfu-Pq4Iq_DRvLqxzT?usp=sharing" class="btn-project">View Colab (.ipynb)</a>
-                                <a href="https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/view?usp=sharing" class="btn-project" target="_blank">View PDF Report</a>
-                            </div>
-                        </div>
+                <section id="education-section" class="content-panel" role="tabpanel" style="display:none;">
+                    <h2 class="section-title">Education</h2>
+                    <div id="education-container" class="timeline"></div>
 
-                        <div class="card section-dark portfolio-card">
-                            <div class="card-thumbnail">
-                                <img src="./photo/Copy of WE ARE SAFEBATH.jpg" alt="Thesis_image" class="thumbnail-img">
-                            </div>
-                            <h3>Machine Learning Based Elderly-Fall Detection</h3>
-                            <div class="card-tags">[ Signal Processing ] [ FMCW Radar ] [ TensorFlow ]<br>[ Microcomputer ]</div>
-                            <p>Thesis about Fall Detection using FMCW Radar as sensor and Machine Learning Algorithm as predictive models</p>
-                            <div class="card-buttons">
-                                <a href="https://drive.google.com/file/d/1UGs0D_newuhYqlSaJP314-LnuzEXgex_/view?usp=sharing" class="btn-project">View Thesis</a>                                
-                                <a href="https://www.canva.com/design/DAGgWYTXuHI/zRFiYk4csDcguwH2ipvnxA/view?utm_content=DAGgWYTXuHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h89f40d87dc"  class="btn-project" target="_blank">View Presentation</a>
-                            </div>
+                    <h2 class="section-title" style="margin-top: 2rem;">Technical Toolkit</h2>
+                    <div id="skills-container" class="skills-grid"></div>
+
+                    <h2 class="section-title" style="margin-top: 2rem;">Soft Skills</h2>
+                    <div id="soft-skills-container" class="soft-skills-grid"></div>
+
+                    <h2 class="section-title" style="margin-top: 2rem;">Languages</h2>
+                    <div id="languages-container" class="languages-grid"></div>
+                </section>
+
+                <section id="portfolio-section" class="content-panel" role="tabpanel" style="display:none;">
+                    <div class="portfolio-header">
+                        <h2 class="section-title">Selected Projects</h2>
+                        <div class="filter-group">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="analytics">Data Analytics</button>
+                            <button class="filter-btn" data-filter="ml">Machine Learning</button>
                         </div>
                     </div>
+
+                    <div id="portfolio-container" class="portfolio-grid"></div>
                 </section>
+
+                <div class="closing-statement text-center mt-2">
+                    <h3 class="mono">LET'S KEEP IN TOUCH</h3>
+                    <p>Thank you for taking the time to visit my portfolio!</p>
+                </div>
 
             </div>
         </main>
