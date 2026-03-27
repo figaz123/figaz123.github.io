@@ -141,8 +141,8 @@ const portfolioData = [
             { url: "#", icon: "fa-solid fa-code", text: "Google Colab", type: "btn-outline" },
             { url: "https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/view?usp=sharing", icon: "fa-solid fa-chart-simple", text: "Presentation", type: "btn-solid" }
         ],
-            // embedUrl: "https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/preview?usp=sharing" // Contoh embed Google Drive
-        embedUrl:"https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/preview?usp=sharing"
+        // embedUrl: "https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/preview?usp=sharing" // Contoh embed Google Drive
+        embedUrl: "https://drive.google.com/file/d/1JE6XH81YiLASRdEnzoNTLXp5CZSyibLu/preview?usp=sharing"
     },
     {
         category: "analytics",
@@ -264,9 +264,9 @@ function renderLanguages() {
 function renderPortfolio() {
     const container = document.getElementById('portfolio-container');
     container.innerHTML = portfolioData.map(proj => {
-        
+
         // 1. Logika untuk Embed vs Icon Placeholder
-        const visualContent = proj.embedUrl 
+        const visualContent = proj.embedUrl
             ? `<iframe src="${proj.embedUrl}" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" class="project-iframe"></iframe>`
             : `<div class="project-embed-placeholder">
                     <i class="fa-solid ${proj.icon}"></i>
@@ -284,7 +284,7 @@ function renderPortfolio() {
         }
 
         // 3. Logika Links (Tambahkan target="_blank" dan rel="noopener noreferrer")
-        const linksHtml = proj.links.map(link => 
+        const linksHtml = proj.links.map(link =>
             `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="${link.type}">
                 <i class="${link.icon}"></i> ${link.text}
             </a>`
@@ -313,7 +313,7 @@ function renderPortfolio() {
 // ==========================================
 
 // document.addEventListener('DOMContentLoaded', () => {
-    
+
 //     // Render content
 //     renderExperience();
 //     renderEducation();
@@ -322,7 +322,7 @@ function renderPortfolio() {
 //     renderPortfolio();
 //     renderLanguages();
 
-    
+
 
 //     // Tab Navigation
 //     const tabBtns = document.querySelectorAll('.tab-btn[data-target]');
@@ -381,13 +381,14 @@ function renderPortfolio() {
 // });
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Render semua konten terlebih dahulu
     if (typeof renderExperience === "function") renderExperience();
     if (typeof renderEducation === "function") renderEducation();
     if (typeof renderSkills === "function") renderSkills();
     if (typeof renderPortfolio === "function") renderPortfolio();
     if (typeof renderSoftSkills === "function") renderSoftSkills();
+    if (typeof renderLanguages === "function") renderLanguages();
 
     // Pastikan selektor menggunakan CLASS, bukan ID yang tidak ada
     const tabBtns = document.querySelectorAll('.tab-btn');
@@ -397,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const targetId = btn.getAttribute('data-target');
-                
+
                 // Update button active state
                 tabBtns.forEach(t => t.classList.remove('active'));
                 btn.classList.add('active');
