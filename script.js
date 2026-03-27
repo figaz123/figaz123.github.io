@@ -312,70 +312,105 @@ function renderPortfolio() {
 // INITIALIZATION & INTERACTIONS
 // ==========================================
 
+// document.addEventListener('DOMContentLoaded', () => {
+    
+//     // Render content
+//     renderExperience();
+//     renderEducation();
+//     renderSkills();
+//     renderSoftSkills();
+//     renderPortfolio();
+//     renderLanguages();
+
+    
+
+//     // Tab Navigation
+//     const tabBtns = document.querySelectorAll('.tab-btn[data-target]');
+//     const panels = document.querySelectorAll('.content-panel');
+
+//     function activateTab(btn) {
+//         tabBtns.forEach(t => {
+//             t.classList.remove('active');
+//             t.setAttribute('aria-selected', 'false');
+//         });
+//         btn.classList.add('active');
+//         btn.setAttribute('aria-selected', 'true');
+
+//         const targetId = btn.getAttribute('data-target');
+//         panels.forEach(panel => {
+//             const isTarget = panel.id === targetId;
+//             panel.style.display = isTarget ? 'block' : 'none';
+//             if (isTarget) {
+//                 panel.style.animation = 'none';
+//                 panel.offsetHeight; // force reflow
+//                 panel.style.animation = '';
+//             }
+//         });
+//     }
+
+//     tabBtns.forEach(btn => {
+//         btn.addEventListener('click', () => activateTab(btn));
+//     });
+
+//     // Portfolio Filtering
+//     const filterBtns = document.querySelectorAll('.filter-btn');
+//     // Ambil ulang DOM elements karena baru dirender oleh JS
+//     const portfolioCards = document.querySelectorAll('.project-card');
+
+//     filterBtns.forEach(btn => {
+//         btn.addEventListener('click', () => {
+//             filterBtns.forEach(f => f.classList.remove('active'));
+//             btn.classList.add('active');
+
+//             const filterValue = btn.getAttribute('data-filter');
+
+//             portfolioCards.forEach(card => {
+//                 if (filterValue === 'all') {
+//                     card.style.display = 'block';
+//                 } else {
+//                     const category = card.getAttribute('data-category');
+//                     if (category && category.includes(filterValue)) {
+//                         card.style.display = 'block';
+//                     } else {
+//                         card.style.display = 'none';
+//                     }
+//                 }
+//             });
+//         });
+//     });
+// });
+
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Render content
-    renderExperience();
-    renderEducation();
-    renderSkills();
-    renderSoftSkills();
-    renderPortfolio();
-    renderLanguages();
+    // Render semua konten terlebih dahulu
+    if (typeof renderExperience === "function") renderExperience();
+    if (typeof renderEducation === "function") renderEducation();
+    if (typeof renderSkills === "function") renderSkills();
+    if (typeof renderPortfolio === "function") renderPortfolio();
+    if (typeof renderSoftSkills === "function") renderSoftSkills();
 
-    
-
-    // Tab Navigation
-    const tabBtns = document.querySelectorAll('.tab-btn[data-target]');
+    // Pastikan selektor menggunakan CLASS, bukan ID yang tidak ada
+    const tabBtns = document.querySelectorAll('.tab-btn');
     const panels = document.querySelectorAll('.content-panel');
 
-    function activateTab(btn) {
-        tabBtns.forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
+    if (tabBtns.length > 0) {
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-target');
+                
+                // Update button active state
+                tabBtns.forEach(t => t.classList.remove('active'));
+                btn.classList.add('active');
 
-        const targetId = btn.getAttribute('data-target');
-        panels.forEach(panel => {
-            const isTarget = panel.id === targetId;
-            panel.style.display = isTarget ? 'block' : 'none';
-            if (isTarget) {
-                panel.style.animation = 'none';
-                panel.offsetHeight; // force reflow
-                panel.style.animation = '';
-            }
-        });
-    }
-
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => activateTab(btn));
-    });
-
-    // Portfolio Filtering
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    // Ambil ulang DOM elements karena baru dirender oleh JS
-    const portfolioCards = document.querySelectorAll('.project-card');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(f => f.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filterValue = btn.getAttribute('data-filter');
-
-            portfolioCards.forEach(card => {
-                if (filterValue === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    const category = card.getAttribute('data-category');
-                    if (category && category.includes(filterValue)) {
-                        card.style.display = 'block';
+                // Switch panels
+                panels.forEach(panel => {
+                    if (panel.id === targetId) {
+                        panel.style.display = 'block';
                     } else {
-                        card.style.display = 'none';
+                        panel.style.display = 'none';
                     }
-                }
+                });
             });
         });
-    });
+    }
 });
