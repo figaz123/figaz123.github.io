@@ -127,6 +127,7 @@ const languagesData = [
 // Feedback 6: Struktur detail Project
 const portfolioData = [
     {
+        year: 2026,
         category: "analytics ml",
         icon: "fa-truck-fast",
         previewText: "Supply Chain Analytics",
@@ -147,6 +148,7 @@ const portfolioData = [
     },
 
     {
+        year: 2025,
         category: "analytics",
         icon: "fa-users-viewfinder",
         previewText: "Customer Segmentation",
@@ -166,6 +168,7 @@ const portfolioData = [
         embedUrl: "https://docs.google.com/presentation/d/16bQsqFRamsZNwRzbryHx8TRkk-p_Vp0xSYKB0HADFsA/preview?usp=sharing"
     },
     {
+        year: 2023,
         category: "ml",
         icon: "fa-microchip",
         previewText: "Signal Processing",
@@ -184,6 +187,25 @@ const portfolioData = [
             { url: "https://www.dgip.go.id/uploads/berita_resmi/file/f0e5f649d9ca4397d231f93a463a01e3.pdf", icon: "fa-solid fa-file-pdf", text: "Patent", type: "btn-solid" }
         ],
         embedUrl: "https://canva.link/swnp1t2d1twkf5e"
+    },
+    {
+        year: 2026,
+        category: "analytics",
+        icon: "fa-chart-line",
+        previewText: "Price Elasticity of Demand (PED)",
+        tags: ["[Python]", "[SQL]", "[EDA]"],
+        title: "PeopleU Pricing Strategy: Evaluating the 2022 Promotion via Price Elasticity of Demand (PED)",
+        description: "PeopleU addressed subscription prices exceeding market averages by launching a larger promotional strategy in 2022. This project evaluates whether these aggressive discounts successfully acquired enough new customers to justify lower profit margins. It focuses on analyzing the 2022 pricing performance to determine the most suitable rates for each subscription type and maximize total revenue",
+        details: {
+            "Objective": "Evaluate the 2022 promotional strategy and calculate Price Elasticity of Demand (PED) across customer segments to optimize pricing for maximum revenue and market share.",
+            "Methodology": "Isolated net-new customer data and utilized Python for data cleaning, employee-based segmentation, and Price Elasticity of Demand modeling to quantify price sensitivity",
+            "Key Findings": "The 2022 strategy achieved a +60% revenue increase to Rp1,305,615,000, revealing hyper-elasticity particularly in the Enterprise segment with a PED coefficient of -11.23.",
+            "Recommendations": "Maintain 2022 promotional pricing levels to prevent a volume collapse, as the high price sensitivity indicates that reverting to 2021 rates would significantly decrease total revenue."
+        },
+        links: [
+            { url: "https://drive.google.com/file/d/1TvH2YOtlbQnk5lbxl0FAKd8vl8G6qcuY/preview", icon: "fa-solid fa-code", text: "Presentation", type: "btn-outline" }
+        ],
+        embedUrl: "https://drive.google.com/file/d/1TvH2YOtlbQnk5lbxl0FAKd8vl8G6qcuY/preview"
     }
 ];
 
@@ -269,6 +291,10 @@ function renderLanguages() {
 
 function renderPortfolio() {
     const container = document.getElementById('portfolio-container');
+
+    // Pastikan data diurutkan dari tahun terbaru ke terlama secara default
+    portfolioData.sort((a, b) => b.year - a.year);
+
     container.innerHTML = portfolioData.map(proj => {
 
         // 1. Logika untuk Embed vs Icon Placeholder
@@ -297,12 +323,15 @@ function renderPortfolio() {
         ).join('');
 
         return `
-        <article class="project-card shadow-sm" data-category="${proj.category}">
+        <article class="project-card shadow-sm" data-category="${proj.category}" data-year="${proj.year}">
             <div class="project-visual">
                 ${visualContent}
             </div>
             <div class="project-content">
-                <div class="project-tags mono">${proj.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
+                <div class="project-tags mono">
+                    <span style="color: var(--accent-color); border-color: var(--accent-color);">${proj.year}</span>
+                    ${proj.tags.map(tag => `<span>${tag}</span>`).join('')}
+                </div>
                 <h3 class="project-title">${proj.title}</h3>
                 <p class="project-desc text-justify">${proj.description}</p>
                 ${detailsHtml}
@@ -400,7 +429,7 @@ function renderPortfolio() {
 //     const tabBtns = document.querySelectorAll('.tab-btn');
 //     const panels = document.querySelectorAll('.content-panel');
 
-    
+
 //     if (tabBtns.length > 0) {
 //         tabBtns.forEach(btn => {
 //             btn.addEventListener('click', () => {
@@ -433,8 +462,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderLanguages();
 
     // 2. Inisialisasi Filter
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    
+    // Hanya pilih tombol yang memiliki atribut data-filter (mengabaikan tombol sort)
+    const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             // A. Update status tombol aktif
@@ -450,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             portfolioCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                
+
                 if (filterValue === 'all') {
                     card.style.display = 'block';
                     card.style.animation = 'fadeIn 0.4s ease forwards';
@@ -464,14 +494,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Logika Tab Navigation (Tetap dipertahankan)
+    // 3. Logika Sort By Year
+    const sortYearBtn = document.getElementById('sort-year-btn');
+    if (sortYearBtn) {
+        sortYearBtn.addEventListener('click', () => {
+            const currentOrder = sortYearBtn.getAttribute('data-order');
+            const newOrder = currentOrder === 'desc' ? 'asc' : 'desc';
+            sortYearBtn.setAttribute('data-order', newOrder);
+
+            // Update icon
+            if (newOrder === 'desc') {
+                sortYearBtn.innerHTML = '<i class="fa-solid fa-arrow-down-9-1"></i> Year';
+            } else {
+                sortYearBtn.innerHTML = '<i class="fa-solid fa-arrow-up-1-9"></i> Year';
+            }
+
+            const portfolioContainer = document.getElementById('portfolio-container');
+            const cards = Array.from(portfolioContainer.querySelectorAll('.project-card'));
+
+            cards.sort((a, b) => {
+                const yearA = parseInt(a.getAttribute('data-year')) || 0;
+                const yearB = parseInt(b.getAttribute('data-year')) || 0;
+                return newOrder === 'asc' ? yearA - yearB : yearB - yearA;
+            });
+
+            cards.forEach(card => portfolioContainer.appendChild(card));
+        });
+    }
+
+    // 4. Logika Tab Navigation (Tetap dipertahankan)
     const tabBtns = document.querySelectorAll('.tab-btn[data-target]');
     const panels = document.querySelectorAll('.content-panel');
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const targetId = btn.getAttribute('data-target');
-            
+
             tabBtns.forEach(t => t.classList.remove('active'));
             btn.classList.add('active');
 
