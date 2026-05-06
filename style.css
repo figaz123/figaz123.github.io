@@ -501,35 +501,37 @@ a {
 
 .portfolio-header {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 24px;
+    flex-wrap: wrap;
     gap: 16px;
 }
 
-.portfolio-filters {
+.portfolio-filters-dropdowns {
     display: flex;
-    flex-direction: column;
     gap: 12px;
-    width: 100%;
-}
-
-.filter-group {
-    display: flex;
     align-items: center;
-    gap: 8px;
     flex-wrap: wrap;
 }
 
-.filter-label {
-    font-size: 0.8rem;
-    color: var(--orange);
-    margin-right: 4px;
-    min-width: 100px;
+.filter-select {
+    background: var(--bg-card);
+    border: 1px solid var(--navy);
+    color: var(--navy);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    outline: none;
+    font-family: 'Outfit', sans-serif;
 }
 
-.filter-actions {
-    margin-top: 4px;
+.filter-select:hover, .filter-select:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 2px var(--orange-glow);
 }
 
 .filter-btn {
@@ -816,11 +818,6 @@ a {
         grid-template-columns: 1fr;
     }
 
-    .filter-label {
-        min-width: unset;
-        width: 100%;
-        margin-bottom: 4px;
-    }
 }
 
 /* card languages section */

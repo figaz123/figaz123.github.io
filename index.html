@@ -133,26 +133,26 @@
                 <section id="portfolio-section" class="content-panel" role="tabpanel" style="display:none;">
                     <div class="portfolio-header">
                         <h2 class="section-title">Selected Projects</h2>
-                        <div class="portfolio-filters">
-                            <div class="filter-group" id="category-filters">
-                                <span class="filter-label mono">// Category:</span>
-                                <button class="filter-btn active" data-filter="all">All</button>
-                                <button class="filter-btn" data-filter="analytics">Data Analytics</button>
-                                <button class="filter-btn" data-filter="ml">Machine Learning</button>
-                            </div>
-                            <div class="filter-group" id="year-filters">
-                                <span class="filter-label mono">// Year:</span>
-                                <!-- Dynamic years will be inserted here -->
-                            </div>
-                            <div class="filter-group" id="month-filters">
-                                <span class="filter-label mono">// Month:</span>
-                                <!-- Dynamic months will be inserted here -->
-                            </div>
-                            <div class="filter-actions">
-                                <button id="sort-year-btn" class="filter-btn" data-order="desc" title="Sort by Date">
-                                    <i class="fa-solid fa-arrow-down-9-1"></i> Date
-                                </button>
-                            </div>
+                        <div class="portfolio-filters-dropdowns">
+                            <select id="category-select" class="filter-select">
+                                <option value="all">All Categories</option>
+                                <option value="analytics">Data Analytics</option>
+                                <option value="ml">Machine Learning</option>
+                            </select>
+
+                            <select id="year-select" class="filter-select">
+                                <option value="all">All Years</option>
+                                <!-- Dynamic years here -->
+                            </select>
+
+                            <select id="month-select" class="filter-select">
+                                <option value="all">All Months</option>
+                                <!-- Dynamic months here -->
+                            </select>
+
+                            <button id="sort-year-btn" class="filter-btn" data-order="desc" title="Sort by Date">
+                                <i class="fa-solid fa-arrow-down-9-1"></i> Date
+                            </button>
                         </div>
                     </div>
 
