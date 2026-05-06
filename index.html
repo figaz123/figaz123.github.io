@@ -133,14 +133,26 @@
                 <section id="portfolio-section" class="content-panel" role="tabpanel" style="display:none;">
                     <div class="portfolio-header">
                         <h2 class="section-title">Selected Projects</h2>
-                        <div class="filter-group">
-                            <button class="filter-btn active" data-filter="all">All</button>
-                            <button class="filter-btn" data-filter="analytics">Data Analytics</button>
-                            <button class="filter-btn" data-filter="ml">Machine Learning</button>
-                            <button id="sort-year-btn" class="filter-btn" data-order="desc" style="margin-left: auto;"
-                                title="Sort by Year">
-                                <i class="fa-solid fa-arrow-down-9-1"></i> Year
-                            </button>
+                        <div class="portfolio-filters">
+                            <div class="filter-group" id="category-filters">
+                                <span class="filter-label mono">// Category:</span>
+                                <button class="filter-btn active" data-filter="all">All</button>
+                                <button class="filter-btn" data-filter="analytics">Data Analytics</button>
+                                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                            </div>
+                            <div class="filter-group" id="year-filters">
+                                <span class="filter-label mono">// Year:</span>
+                                <!-- Dynamic years will be inserted here -->
+                            </div>
+                            <div class="filter-group" id="month-filters">
+                                <span class="filter-label mono">// Month:</span>
+                                <!-- Dynamic months will be inserted here -->
+                            </div>
+                            <div class="filter-actions">
+                                <button id="sort-year-btn" class="filter-btn" data-order="desc" title="Sort by Date">
+                                    <i class="fa-solid fa-arrow-down-9-1"></i> Date
+                                </button>
+                            </div>
                         </div>
                     </div>
 

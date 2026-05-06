@@ -128,6 +128,7 @@ const languagesData = [
 const portfolioData = [
     {
         year: 2026,
+        month: "February",
         category: "analytics ml",
         icon: "fa-truck-fast",
         previewText: "Supply Chain Analytics",
@@ -149,6 +150,7 @@ const portfolioData = [
 
     {
         year: 2025,
+        month: "December",
         category: "analytics",
         icon: "fa-users-viewfinder",
         previewText: "Customer Segmentation",
@@ -169,6 +171,7 @@ const portfolioData = [
     },
     {
         year: 2023,
+        month: "August",
         category: "ml",
         icon: "fa-microchip",
         previewText: "Signal Processing",
@@ -190,6 +193,7 @@ const portfolioData = [
     },
     {
         year: 2026,
+        month: "May",
         category: "analytics",
         icon: "fa-chart-line",
         previewText: "Price Elasticity of Demand (PED)",
@@ -209,6 +213,15 @@ const portfolioData = [
     }
 ];
 
+
+// ==========================================
+// UTILS & CONSTANTS
+// ==========================================
+
+const monthMap = {
+    "January": 1, "February": 2, "March": 3, "April": 4, "May": 5, "June": 6,
+    "July": 7, "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
+};
 
 // ==========================================
 // RENDERING FUNCTIONS
@@ -292,8 +305,11 @@ function renderLanguages() {
 function renderPortfolio() {
     const container = document.getElementById('portfolio-container');
 
-    // Pastikan data diurutkan dari tahun terbaru ke terlama secara default
-    portfolioData.sort((a, b) => b.year - a.year);
+    // Default sort: Newest to Oldest (Year then Month)
+    portfolioData.sort((a, b) => {
+        if (b.year !== a.year) return b.year - a.year;
+        return monthMap[b.month] - monthMap[a.month];
+    });
 
     container.innerHTML = portfolioData.map(proj => {
 
@@ -323,13 +339,13 @@ function renderPortfolio() {
         ).join('');
 
         return `
-        <article class="project-card shadow-sm" data-category="${proj.category}" data-year="${proj.year}">
+        <article class="project-card shadow-sm" data-category="${proj.category}" data-year="${proj.year}" data-month="${proj.month}">
             <div class="project-visual">
                 ${visualContent}
             </div>
             <div class="project-content">
                 <div class="project-tags mono">
-                    <span style="color: var(--accent-color); border-color: var(--accent-color);">${proj.year}</span>
+                    <span style="color: var(--accent-color); border-color: var(--accent-color);">${proj.month} ${proj.year}</span>
                     ${proj.tags.map(tag => `<span>${tag}</span>`).join('')}
                 </div>
                 <h3 class="project-title">${proj.title}</h3>
@@ -347,110 +363,86 @@ function renderPortfolio() {
 // INITIALIZATION & INTERACTIONS
 // ==========================================
 
-// document.addEventListener('DOMContentLoaded', () => {
 
-//     // Render content
-//     renderExperience();
-//     renderEducation();
-//     renderSkills();
-//     renderSoftSkills();
-//     renderPortfolio();
-//     renderLanguages();
+function renderFilters() {
+    const yearContainer = document.getElementById('year-filters');
+    const monthContainer = document.getElementById('month-filters');
 
+    // Extract unique years and months from portfolioData
+    const years = [...new Set(portfolioData.map(p => p.year))].sort((a, b) => b - a);
+    const months = [...new Set(portfolioData.map(p => p.month))].sort((a, b) => monthMap[a] - monthMap[b]);
 
+    // Render Year Filters
+    yearContainer.innerHTML = `
+        <span class="filter-label mono">// Year:</span>
+        <button class="filter-btn active" data-filter-year="all">All</button>
+        ${years.map(year => `<button class="filter-btn" data-filter-year="${year}">${year}</button>`).join('')}
+    `;
 
-//     // Tab Navigation
-//     const tabBtns = document.querySelectorAll('.tab-btn[data-target]');
-//     const panels = document.querySelectorAll('.content-panel');
+    // Render Month Filters
+    monthContainer.innerHTML = `
+        <span class="filter-label mono">// Month:</span>
+        <button class="filter-btn active" data-filter-month="all">All</button>
+        ${months.map(month => `<button class="filter-btn" data-filter-month="${month}">${month}</button>`).join('')}
+    `;
+}
 
-//     function activateTab(btn) {
-//         tabBtns.forEach(t => {
-//             t.classList.remove('active');
-//             t.setAttribute('aria-selected', 'false');
-//         });
-//         btn.classList.add('active');
-//         btn.setAttribute('aria-selected', 'true');
+function handlePortfolioFiltering() {
+    const categoryBtns = document.querySelectorAll('#category-filters .filter-btn');
+    const yearBtns = document.querySelectorAll('#year-filters .filter-btn');
+    const monthBtns = document.querySelectorAll('#month-filters .filter-btn');
+    const portfolioCards = document.querySelectorAll('.project-card');
 
-//         const targetId = btn.getAttribute('data-target');
-//         panels.forEach(panel => {
-//             const isTarget = panel.id === targetId;
-//             panel.style.display = isTarget ? 'block' : 'none';
-//             if (isTarget) {
-//                 panel.style.animation = 'none';
-//                 panel.offsetHeight; // force reflow
-//                 panel.style.animation = '';
-//             }
-//         });
-//     }
+    let activeCategory = 'all';
+    let activeYear = 'all';
+    let activeMonth = 'all';
 
-//     tabBtns.forEach(btn => {
-//         btn.addEventListener('click', () => activateTab(btn));
-//     });
+    function filterCards() {
+        portfolioCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            const year = card.getAttribute('data-year');
+            const month = card.getAttribute('data-month');
 
-//     // Portfolio Filtering
-//     const filterBtns = document.querySelectorAll('.filter-btn');
-//     // Ambil ulang DOM elements karena baru dirender oleh JS
-//     const portfolioCards = document.querySelectorAll('.project-card');
+            const categoryMatch = activeCategory === 'all' || (category && category.includes(activeCategory));
+            const yearMatch = activeYear === 'all' || year === activeYear;
+            const monthMatch = activeMonth === 'all' || month === activeMonth;
 
-//     filterBtns.forEach(btn => {
-//         btn.addEventListener('click', () => {
-//             filterBtns.forEach(f => f.classList.remove('active'));
-//             btn.classList.add('active');
+            if (categoryMatch && yearMatch && monthMatch) {
+                card.style.display = 'block';
+                card.style.animation = 'fadeIn 0.4s ease forwards';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 
-//             const filterValue = btn.getAttribute('data-filter');
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeCategory = btn.getAttribute('data-filter');
+            filterCards();
+        });
+    });
 
-//             portfolioCards.forEach(card => {
-//                 if (filterValue === 'all') {
-//                     card.style.display = 'block';
-//                 } else {
-//                     const category = card.getAttribute('data-category');
-//                     if (category && category.includes(filterValue)) {
-//                         card.style.display = 'block';
-//                     } else {
-//                         card.style.display = 'none';
-//                     }
-//                 }
-//             });
-//         });
-//     });
-// });
+    yearBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            yearBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeYear = btn.getAttribute('data-filter-year');
+            filterCards();
+        });
+    });
 
-// document.addEventListener('DOMContentLoaded', () => {
-
-//     // Render semua konten terlebih dahulu
-//     if (typeof renderExperience === "function") renderExperience();
-//     if (typeof renderEducation === "function") renderEducation();
-//     if (typeof renderSkills === "function") renderSkills();
-//     if (typeof renderPortfolio === "function") renderPortfolio();
-//     if (typeof renderSoftSkills === "function") renderSoftSkills();
-//     if (typeof renderLanguages === "function") renderLanguages();
-
-//     // Pastikan selektor menggunakan CLASS, bukan ID yang tidak ada
-//     const tabBtns = document.querySelectorAll('.tab-btn');
-//     const panels = document.querySelectorAll('.content-panel');
-
-
-//     if (tabBtns.length > 0) {
-//         tabBtns.forEach(btn => {
-//             btn.addEventListener('click', () => {
-//                 const targetId = btn.getAttribute('data-target');
-
-//                 // Update button active state
-//                 tabBtns.forEach(t => t.classList.remove('active'));
-//                 btn.classList.add('active');
-
-//                 // Switch panels
-//                 panels.forEach(panel => {
-//                     if (panel.id === targetId) {
-//                         panel.style.display = 'block';
-//                     } else {
-//                         panel.style.display = 'none';
-//                     }
-//                 });
-//             });
-//         });
-//     }
-// });
+    monthBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            monthBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeMonth = btn.getAttribute('data-filter-month');
+            filterCards();
+        });
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Jalankan semua fungsi render terlebih dahulu
@@ -458,43 +450,14 @@ document.addEventListener('DOMContentLoaded', () => {
     renderEducation();
     renderSkills();
     renderPortfolio(); // Pastikan kartu portfolio sudah ada di DOM
+    renderFilters();
     renderSoftSkills();
     renderLanguages();
 
     // 2. Inisialisasi Filter
-    // Hanya pilih tombol yang memiliki atribut data-filter (mengabaikan tombol sort)
-    const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
+    handlePortfolioFiltering();
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // A. Update status tombol aktif
-            filterBtns.forEach(f => f.classList.remove('active'));
-            btn.classList.add('active');
-
-            // B. Ambil nilai filter (analytics, ml, atau all)
-            const filterValue = btn.getAttribute('data-filter');
-
-            // C. Ambil semua kartu (Harus diseleksi di dalam event click 
-            // agar mendapatkan elemen terbaru hasil render JS)
-            const portfolioCards = document.querySelectorAll('.project-card');
-
-            portfolioCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-
-                if (filterValue === 'all') {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.4s ease forwards';
-                } else if (category && category.includes(filterValue)) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.4s ease forwards';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    // 3. Logika Sort By Year
+    // 3. Logika Sort By Date
     const sortYearBtn = document.getElementById('sort-year-btn');
     if (sortYearBtn) {
         sortYearBtn.addEventListener('click', () => {
@@ -515,7 +478,16 @@ document.addEventListener('DOMContentLoaded', () => {
             cards.sort((a, b) => {
                 const yearA = parseInt(a.getAttribute('data-year')) || 0;
                 const yearB = parseInt(b.getAttribute('data-year')) || 0;
-                return newOrder === 'asc' ? yearA - yearB : yearB - yearA;
+                const monthA = monthMap[a.getAttribute('data-month')] || 0;
+                const monthB = monthMap[b.getAttribute('data-month')] || 0;
+
+                if (newOrder === 'asc') {
+                    if (yearA !== yearB) return yearA - yearB;
+                    return monthA - monthB;
+                } else {
+                    if (yearB !== yearA) return yearB - yearA;
+                    return monthB - monthA;
+                }
             });
 
             cards.forEach(card => portfolioContainer.appendChild(card));
