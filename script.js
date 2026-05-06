@@ -365,39 +365,33 @@ function renderPortfolio() {
 
 
 function renderFilters() {
-    const yearContainer = document.getElementById('year-filters');
-    const monthContainer = document.getElementById('month-filters');
+    const yearSelect = document.getElementById('year-select');
+    const monthSelect = document.getElementById('month-select');
 
     // Extract unique years and months from portfolioData
     const years = [...new Set(portfolioData.map(p => p.year))].sort((a, b) => b - a);
     const months = [...new Set(portfolioData.map(p => p.month))].sort((a, b) => monthMap[a] - monthMap[b]);
 
-    // Render Year Filters
-    yearContainer.innerHTML = `
-        <span class="filter-label mono">// Year:</span>
-        <button class="filter-btn active" data-filter-year="all">All</button>
-        ${years.map(year => `<button class="filter-btn" data-filter-year="${year}">${year}</button>`).join('')}
-    `;
+    // Populate Year Select
+    yearSelect.innerHTML = '<option value="all">All Years</option>' +
+        years.map(year => `<option value="${year}">${year}</option>`).join('');
 
-    // Render Month Filters
-    monthContainer.innerHTML = `
-        <span class="filter-label mono">// Month:</span>
-        <button class="filter-btn active" data-filter-month="all">All</button>
-        ${months.map(month => `<button class="filter-btn" data-filter-month="${month}">${month}</button>`).join('')}
-    `;
+    // Populate Month Select
+    monthSelect.innerHTML = '<option value="all">All Months</option>' +
+        months.map(month => `<option value="${month}">${month}</option>`).join('');
 }
 
 function handlePortfolioFiltering() {
-    const categoryBtns = document.querySelectorAll('#category-filters .filter-btn');
-    const yearBtns = document.querySelectorAll('#year-filters .filter-btn');
-    const monthBtns = document.querySelectorAll('#month-filters .filter-btn');
+    const categorySelect = document.getElementById('category-select');
+    const yearSelect = document.getElementById('year-select');
+    const monthSelect = document.getElementById('month-select');
     const portfolioCards = document.querySelectorAll('.project-card');
 
-    let activeCategory = 'all';
-    let activeYear = 'all';
-    let activeMonth = 'all';
-
     function filterCards() {
+        const activeCategory = categorySelect.value;
+        const activeYear = yearSelect.value;
+        const activeMonth = monthSelect.value;
+
         portfolioCards.forEach(card => {
             const category = card.getAttribute('data-category');
             const year = card.getAttribute('data-year');
@@ -416,32 +410,9 @@ function handlePortfolioFiltering() {
         });
     }
 
-    categoryBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            categoryBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeCategory = btn.getAttribute('data-filter');
-            filterCards();
-        });
-    });
-
-    yearBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            yearBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeYear = btn.getAttribute('data-filter-year');
-            filterCards();
-        });
-    });
-
-    monthBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            monthBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeMonth = btn.getAttribute('data-filter-month');
-            filterCards();
-        });
-    });
+    categorySelect.addEventListener('change', filterCards);
+    yearSelect.addEventListener('change', filterCards);
+    monthSelect.addEventListener('change', filterCards);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
