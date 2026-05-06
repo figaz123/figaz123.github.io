@@ -16,6 +16,7 @@ const experienceData = [
         tasks: [
             "Developed and implemented a centralized knowledge management system to replace unstructured Google Docs, significantly reducing Subject Matter Expert (SME) dependency and improving information retrieval efficiency by approximately 20%; optimized documentation workflows by centralizing project artifacts, enabling faster onboarding and continuity for future initiatives.",
             "Assists in managing the Learning Team as Person in Charge (PIC) within the PKKO Team, coordinating learning initiatives across stakeholders and ensuring alignment between workforce capability development in 5 subsidiaries and production performance objectives.",
+            "Designed and implemented an automated Looker Studio dashboard for maintenance and operations assessments, eliminating manual spreadsheet processing and enabling real-time visualization of assessment distribution for faster insight generation.",
             "Analyzed operator and maintenance assessment data, streamlining evaluation workflows and improving efficiency in obtaining assessment results by approximately 20%, enabling faster insight generation for workforce capability improvement.",
             "Coordinated thermal data collection and facilitated vendor training sessions on 3D Vista and orthophoto processing, resulting in the successful delivery of actionable thermal reports to subsidiaries for factory surveying."
         ]
