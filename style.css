@@ -501,16 +501,35 @@ a {
 
 .portfolio-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 24px;
-    flex-wrap: wrap;
     gap: 16px;
+}
+
+.portfolio-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
 }
 
 .filter-group {
     display: flex;
+    align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-size: 0.8rem;
+    color: var(--orange);
+    margin-right: 4px;
+    min-width: 100px;
+}
+
+.filter-actions {
+    margin-top: 4px;
 }
 
 .filter-btn {
@@ -795,6 +814,12 @@ a {
 @media (max-width: 480px) {
     .soft-skills-grid {
         grid-template-columns: 1fr;
+    }
+
+    .filter-label {
+        min-width: unset;
+        width: 100%;
+        margin-bottom: 4px;
     }
 }
 
