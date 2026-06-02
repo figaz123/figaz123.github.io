@@ -229,7 +229,8 @@ const portfolioData = [
             "Recommendations": "Investigate the drop in Email traffic by mandating an Email Validation feature, and pitch an A/B Testing WhatsApp Template to top clients to shift volume to higher-margin channels."
         },
         links: [
-            { url: "https://drive.google.com/file/d/1CuT3HhRgI_kh9BHNbVzu00HKvlwwXZS5/preview", icon: "fa-solid fa-chart-line", text: "Dashboard", type: "btn-outline" }
+            { url: "https://datastudio.google.com/s/nf9wuIQ4Z4A", icon: "fa-solid fa-chart-line", text: "Dashboard", type: "btn-outline" },
+            { url: "https://drive.google.com/file/d/1CuT3HhRgI_kh9BHNbVzu00HKvlwwXZS5/preview", icon: "fa-solid fa-file-lines", text: "Presentation", type: "btn-solid" }
         ],
         embedUrl: "https://drive.google.com/file/d/1CuT3HhRgI_kh9BHNbVzu00HKvlwwXZS5/preview"
     }
