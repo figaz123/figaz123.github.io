@@ -190,7 +190,8 @@ const portfolioData = [
             { url: "https://drive.google.com/file/d/1UGs0D_newuhYqlSaJP314-LnuzEXgex_/view?usp=sharing", icon: "fa-solid fa-file-lines", text: "Paper", type: "btn-solid" },
             { url: "https://www.dgip.go.id/uploads/berita_resmi/file/f0e5f649d9ca4397d231f93a463a01e3.pdf", icon: "fa-solid fa-file-pdf", text: "Patent", type: "btn-solid" }
         ],
-        embedUrl: "https://canva.link/swnp1t2d1twkf5e"
+        embedUrl: "https://www.canva.com/design/DAGgWYTXuHI/ZzFvXsXvdo_0_1qXHnr80A/view"
+        
     },
     {
         year: 2026,
@@ -211,7 +212,28 @@ const portfolioData = [
             { url: "https://drive.google.com/file/d/1TvH2YOtlbQnk5lbxl0FAKd8vl8G6qcuY/preview", icon: "fa-solid fa-code", text: "Presentation", type: "btn-outline" }
         ],
         embedUrl: "https://drive.google.com/file/d/1TvH2YOtlbQnk5lbxl0FAKd8vl8G6qcuY/preview"
+    },
+    {
+        year: 2026,
+        month: "May",
+        category: "analytics",
+        icon: "fa-chart-pie",
+        previewText: "Omnichannel Performance Analysis",
+        tags: ["[SQL]", "[Data Analytics]", "[Dashboarding]"],
+        title: "OCA Indonesia: Strategic Channel Performance Analysis",
+        description: "Optimizing Omnichannel Growth & Operational Health for OCA Indonesia by analyzing 122,749 transactions across 4 channels.",
+        details: {
+            "Objective": "Establish a Single Source of Truth for C-Level Operational and Business Decision-making by connecting disconnected monitoring across multiple channels.",
+            "Methodology": "Employed SQL transformations to consolidate WA, SMS, Email, and Call data, and built an interactive executive dashboard to track revenue and operational health.",
+            "Key Findings": "SMS drives the highest efficiency with a 99.6% billable rate, while a structural drop in Email traffic and an anomaly of a 65.66% bounce rate were detected.",
+            "Recommendations": "Investigate the drop in Email traffic by mandating an Email Validation feature, and pitch an A/B Testing WhatsApp Template to top clients to shift volume to higher-margin channels."
+        },
+        links: [
+            { url: "https://drive.google.com/file/d/1CuT3HhRgI_kh9BHNbVzu00HKvlwwXZS5/preview", icon: "fa-solid fa-chart-line", text: "Dashboard", type: "btn-outline" }
+        ],
+        embedUrl: "https://drive.google.com/file/d/1CuT3HhRgI_kh9BHNbVzu00HKvlwwXZS5/preview"
     }
+
 ];
 
 
