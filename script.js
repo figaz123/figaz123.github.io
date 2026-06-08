@@ -188,7 +188,8 @@ const portfolioData = [
         links: [
             { url: "https://canva.link/swnp1t2d1twkf5e", icon: "fa-solid fa-code", text: "Presentation", type: "btn-outline" },
             { url: "https://drive.google.com/file/d/1UGs0D_newuhYqlSaJP314-LnuzEXgex_/view?usp=sharing", icon: "fa-solid fa-file-lines", text: "Paper", type: "btn-solid" },
-            { url: "https://www.dgip.go.id/uploads/berita_resmi/file/f0e5f649d9ca4397d231f93a463a01e3.pdf", icon: "fa-solid fa-file-pdf", text: "Patent", type: "btn-solid" }
+            { url: "https://www.dgip.go.id/uploads/berita_resmi/file/f0e5f649d9ca4397d231f93a463a01e3.pdf", icon: "fa-solid fa-file-pdf", text: "Patent", type: "btn-solid" },
+            { url: "https://drive.google.com/file/d/1Sb4uF08Bjk207oz4SJiPILLZKt3ULjzz/preview", icon: "fa-solid fa-file-lines", text: "Video", type: "btn-solid" }
         ],
         embedUrl: "https://www.canva.com/design/DAGgWYTXuHI/ZzFvXsXvdo_0_1qXHnr80A/view"
         
