@@ -234,7 +234,30 @@ const portfolioData = [
             { url: "https://drive.google.com/file/d/1CuT3HhRgI_kh9BHNbVzu00HKvlwwXZS5/preview", icon: "fa-solid fa-file-lines", text: "Presentation", type: "btn-solid" }
         ],
         embedUrl: "https://drive.google.com/file/d/1CuT3HhRgI_kh9BHNbVzu00HKvlwwXZS5/preview"
+    },
+    {
+        year: 2026,
+        month: "May",
+        category: "analytics",
+        icon: "fa-users-gear",
+        previewText: "Client Segmentation & Capacity Forecasting",
+        tags: ["[SQL]", "[K-Means]", "[Time-Series]"],
+        title: "OCA Indonesia: Client Segmentation and Capacity Forecasting",
+        description: "Optimizing client retention and server stability for OCA Indonesia by analyzing and clustering 122,749 transaction logs.",
+        details: {
+            "Objective": "Identify high-value revenue drivers, optimize server stability, mitigate silent churn risk, and enable proactive capacity planning to replace reactive fire-fighting.",
+            "Methodology": "Processed cross-channel data logs using SQL transformations, applied K-Means clustering (K=3) for client personas, and utilized Meta Prophet Engine for time-series capacity forecasting.",
+            "Key Findings": "Identified a VIP client cluster driving 60% of revenue, forecasted 7-day server capacity with 93.37% accuracy, and detected infrastructure bottlenecks peaking between 9:00 AM and 11:00 AM.",
+            "Recommendations": "Launch targeted outreach to recover 33% of endangered revenue from regular accounts, cross-sell bundles to Power Users, and deploy Key Account Managers with server auto-scaling for VIPs."
+        },
+        links: [
+            { url: "#", icon: "fa-solid fa-file-lines", text: "Presentation", type: "btn-solid" },
+            { url: "#", icon: "fa-brands fa-github", text: "Repository", type: "btn-outline" }
+        ],
+        embedUrl: "https://drive.google.com/file/d/1PifhRUMYBBWBduGkF-TL92pTCBhVyrw_/preview"
     }
+
+
 
 ];
 
