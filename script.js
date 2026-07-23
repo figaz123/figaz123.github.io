@@ -251,8 +251,8 @@ const portfolioData = [
             "Recommendations": "Launch targeted outreach to recover 33% of endangered revenue from regular accounts, cross-sell bundles to Power Users, and deploy Key Account Managers with server auto-scaling for VIPs."
         },
         links: [
-            { url: "#", icon: "fa-solid fa-file-lines", text: "Presentation", type: "btn-solid" },
-            { url: "#", icon: "fa-brands fa-github", text: "Repository", type: "btn-outline" }
+            { url: "https://drive.google.com/file/d/1PifhRUMYBBWBduGkF-TL92pTCBhVyrw_/preview", icon: "fa-solid fa-file-lines", text: "Presentation", type: "btn-solid" },
+            // { url: "#", icon: "fa-brands fa-github", text: "Repository", type: "btn-outline" }
         ],
         embedUrl: "https://drive.google.com/file/d/1PifhRUMYBBWBduGkF-TL92pTCBhVyrw_/preview"
     }
