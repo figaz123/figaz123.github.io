@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study Reader — Figo Azzam De Fitrah Portfolio</title>
+    
+    <!-- Google Fonts & FontAwesome CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Tailwind CSS Engine CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 
+                            DEFAULT: '#1C3968', 
+                            dark: '#13284B', 
+                            light: '#254A85' 
+                        },
+                        orange: { 
+                            DEFAULT: '#F68F45', 
+                            dark: '#D97736', 
+                            glow: 'rgba(246, 143, 69, 0.2)' 
+                        },
+                        techblue: '#2563EB',
+                        slatebg: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['DM Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Centralized Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-slatebg text-slate-800 font-inter antialiased bg-grid-pattern min-h-screen flex flex-col justify-between">
+
+    <!-- DYNAMIC NAVIGATION HEADER (Injected by js/layout.js) -->
+    <header id="site-header"></header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-10">
+        
+        <!-- Breadcrumb Navigation Bar -->
+        <nav class="flex items-center gap-2 text-xs font-mono text-slate-500 bg-white/80 p-3 rounded-xl border border-slate-200/80 shadow-sm">
+            <a href="index.html" class="hover:text-orange transition-colors">Home</a>
+            <i class="fa-solid fa-chevron-right text-[10px] opacity-40"></i>
+            <a href="case_studies.html" class="hover:text-orange transition-colors">Case Studies</a>
+            <i class="fa-solid fa-chevron-right text-[10px] opacity-40"></i>
+            <span id="breadcrumb-title" class="text-navy font-semibold truncate">Loading Case Study...</span>
+        </nav>
+
+        <!-- Dynamic Main Case Study Container -->
+        <div id="active-case-study-container" class="space-y-8">
+            <!-- Loading Skeleton Placeholder -->
+            <div class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 text-center space-y-4 shadow-sm animate-pulse">
+                <div class="w-12 h-12 rounded-2xl bg-slate-200 mx-auto"></div>
+                <div class="h-6 bg-slate-200 rounded max-w-md mx-auto"></div>
+                <div class="h-4 bg-slate-100 rounded max-w-sm mx-auto"></div>
+                <div class="text-xs font-mono text-slate-400">Hydrating case study payload from portfolio data pipeline...</div>
+            </div>
+        </div>
+
+        <!-- Exploration Grid Section -->
+        <section class="pt-8 border-t border-slate-200/80 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">// Exploration</span>
+                    <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">More Business Case Studies</h2>
+                </div>
+                <span class="text-xs font-mono text-slate-500">Click any card below to deep dive</span>
+            </div>
+
+            <!-- Dynamic Related Projects Grid -->
+            <div id="related-projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Hydrated dynamically by JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- DYNAMIC FOOTER (Injected by js/layout.js) -->
+    <footer id="site-footer"></footer>
+
+    <!-- NOTIFICATION TOAST (Controlled by js/layout.js) -->
+    <div id="toast-msg" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white font-mono text-xs px-4 py-3 rounded-xl shadow-2xl border border-white/20 hidden flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-text">Text copied!</span>
+    </div>
+
+    <!-- MODULAR CLIENT SCRIPT -->
+    <script type="module">
+        import { fetchPortfolioData, isValidUrl, FALLBACK_IMAGE_SVG } from './js/api.js';
+        import { renderHeader, renderFooter, showToast, copyToClipboard, renderMarkdown } from './js/layout.js';
+
+        let allProjects = [];
+        let activeProjectId = null;
+
+        async function init() {
+            renderHeader('case_studies');
+            renderFooter();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            activeProjectId = urlParams.get('id');
+
+            await loadProjectsAndInitialize();
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+
+        // Handle URL history state change for smooth SPA-like switching
+        window.addEventListener('popstate', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            activeProjectId = urlParams.get('id');
+            renderActiveCaseStudy();
+            renderRelatedProjects();
+        });
+
+        function getEmbeddableUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            let clean = url.trim();
+            if (clean.includes('drive.google.com')) {
+                if (!clean.includes('/preview')) {
+                    clean = clean.replace(/\/view(\?.*)?$/, '/preview').replace(/\/edit(\?.*)?$/, '/preview');
+                    if (!clean.endsWith('/preview')) {
+                        clean = clean.split('?')[0].replace(/\/$/, '') + '/preview';
+                    }
+                }
+            }
+            return clean;
+        }
+
+        async function loadProjectsAndInitialize() {
+            const data = await fetchPortfolioData();
+            
+            allProjects = (data.projects || []).filter(
+                p => p && p.published !== 'draft' && p.published !== 'hidden' && p.published !== 'false' && p.published !== false
+            );
+
+            if (!activeProjectId || !allProjects.some(p => String(p.id) === String(activeProjectId))) {
+                if (allProjects.length > 0) {
+                    activeProjectId = allProjects[0].id;
+                }
+            }
+
+            renderActiveCaseStudy();
+            renderRelatedProjects();
+        }
+
+        function renderActiveCaseStudy() {
+            const container = document.getElementById('active-case-study-container');
+            const breadcrumbTitle = document.getElementById('breadcrumb-title');
+            if (!container) return;
+
+            if (allProjects.length === 0) {
+                container.innerHTML = `<div class="bg-white rounded-3xl p-12 text-center text-slate-500 font-mono text-xs">No published case studies available.</div>`;
+                return;
+            }
+
+            const proj = allProjects.find(p => String(p.id) === String(activeProjectId)) || allProjects[0];
+            activeProjectId = proj.id;
+
+            if (breadcrumbTitle) breadcrumbTitle.innerText = proj.title || 'Case Study';
+            document.title = `${proj.title || 'Case Study'} — Figo Azzam Case Study`;
+
+            const formattedDate = `${proj.month || ''} ${proj.year || ''}`.trim() || '2026';
+            
+            // Resolve all potential link aliases (supporting camelCase & snake_case)
+            const rawEmbedUrl = (proj.embedUrl || proj.embed_url || '').trim();
+            const rawDashboardUrl = (proj.dashboardUrl || proj.dashboard_url || proj.lookerUrl || proj.looker_url || '').trim();
+            const rawImagePath = (proj.imagePath || proj.image_path || proj.coverImage || proj.cover_image || proj.image || '').trim();
+            const artUrl = (proj.articleUrl || proj.article_url || '').trim();
+            const gitUrl = (proj.githubUrl || proj.github_url || '').trim();
+
+            // Detect whether imagePath contains a Data Studio / Looker Studio or external dashboard URL
+            const isImagePathDashboard = rawImagePath && (
+                rawImagePath.includes('datastudio.google.com') ||
+                rawImagePath.includes('lookerstudio.google.com') ||
+                rawImagePath.includes('tableau') ||
+                (isValidUrl(rawImagePath) && !rawImagePath.match(/\.(png|jpg|jpeg|webp|svg|gif|avif)(\?.*)?$/i) && !rawImagePath.startsWith('assets/'))
+            );
+
+            const isActualImage = rawImagePath && !isImagePathDashboard && (
+                rawImagePath.match(/\.(png|jpg|jpeg|webp|svg|gif|avif)(\?.*)?$/i) ||
+                rawImagePath.startsWith('assets/') ||
+                rawImagePath.startsWith('images/') ||
+                rawImagePath.startsWith('./') ||
+                (!rawImagePath.includes('lookerstudio') && !rawImagePath.includes('datastudio') && !rawImagePath.includes('drive.google.com'))
+            );
+            const validThumbnail = isActualImage ? rawImagePath : '';
+
+            // Distinctly classify Button 1 (Google Drive) & Button 2 (Live Dashboard / Data Studio from imagePath)
+            let driveUrl = '';
+            let dashboardUrl = '';
+
+            const linkCandidates = [
+                rawImagePath,
+                rawDashboardUrl,
+                rawEmbedUrl,
+                proj.link,
+                proj.url
+            ].filter(isValidUrl);
+
+            for (const link of linkCandidates) {
+                if (link.includes('drive.google.com')) {
+                    if (!driveUrl) driveUrl = link.replace('/preview', '/view');
+                } else if (link.includes('datastudio.google.com') || link.includes('lookerstudio.google.com') || link.includes('tableau.com')) {
+                    if (!dashboardUrl) dashboardUrl = link;
+                } else if (!dashboardUrl && !link.match(/\.(png|jpg|jpeg|webp|svg|gif|avif)(\?.*)?$/i) && !link.startsWith('assets/')) {
+                    dashboardUrl = link;
+                }
+            }
+
+            // Fallback assignments
+            if (!dashboardUrl && isImagePathDashboard) {
+                dashboardUrl = rawImagePath;
+            } else if (!dashboardUrl && rawEmbedUrl && !rawEmbedUrl.includes('drive.google.com')) {
+                dashboardUrl = rawEmbedUrl;
+            }
+
+            // Build Tags HTML
+            const tagsList = Array.isArray(proj.tags) ? proj.tags : (typeof proj.tags === 'string' ? proj.tags.split(',') : []);
+            const tagsHTML = tagsList.map(t => 
+                `<span class="bg-navy/10 text-navy font-mono text-[11px] px-2.5 py-1 rounded-md font-medium border border-navy/10">[${t.trim()}]</span>`
+            ).join(' ');
+
+            let actionButtonsHTML = '';
+            
+            // BUTTON 1: Google Drive Presentation / Files
+            if (isValidUrl(driveUrl)) {
+                actionButtonsHTML += `
+                    <a href="${driveUrl}" target="_blank" rel="noopener noreferrer" class="bg-navy hover:bg-orange text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-2 group">
+                        <i class="fa-brands fa-google-drive text-amber-400 text-sm group-hover:scale-110 transition-transform"></i>
+                        <span>Google Drive Deck</span>
+                    </a>
+                `;
+            }
+
+            // BUTTON 2: Live Dashboard (Data Studio / Looker Studio / External Files)
+            if (isValidUrl(dashboardUrl)) {
+                actionButtonsHTML += `
+                    <a href="${dashboardUrl}" target="_blank" rel="noopener noreferrer" class="bg-techblue hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-2 group">
+                        <i class="fa-solid fa-chart-pie text-orange text-sm group-hover:rotate-12 transition-transform"></i>
+                        <span>Live Dashboard</span>
+                    </a>
+                `;
+            }
+
+            // Additional Buttons: Technical Article & GitHub Repository
+            if (isValidUrl(artUrl)) {
+                actionButtonsHTML += `
+                    <a href="${artUrl}" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-100 text-slate-800 text-xs font-semibold px-4 py-2.5 rounded-xl transition-all border border-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-newspaper text-navy"></i>
+                        <span>Article</span>
+                    </a>
+                `;
+            }
+            if (isValidUrl(gitUrl)) {
+                actionButtonsHTML += `
+                    <a href="${gitUrl}" target="_blank" rel="noopener noreferrer" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                `;
+            }
+
+            let topMediaHTML = '';
+            const isDriveEmbed = (rawEmbedUrl && rawEmbedUrl.includes('drive.google.com')) || (driveUrl && driveUrl.includes('drive.google.com'));
+
+            if (isDriveEmbed) {
+                const driveEmbedSrc = getEmbeddableUrl(driveUrl || rawEmbedUrl);
+                topMediaHTML = `
+                    <div class="aspect-video w-full rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-navy relative group">
+                        <iframe 
+                            src="${driveEmbedSrc}" 
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation" 
+                            class="w-full h-full border-0" 
+                            title="${proj.title}" 
+                            loading="lazy" 
+                            allowfullscreen>
+                        </iframe>
+                        <div class="absolute bottom-3 right-3 bg-navy/90 backdrop-blur text-white text-[10px] font-mono px-2.5 py-1 rounded-md flex items-center gap-1.5 border border-white/10 shadow-sm pointer-events-none">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>Google Drive Presentation Deck</span>
+                        </div>
+                    </div>
+                `;
+            } else if (validThumbnail) {
+                topMediaHTML = `
+                    <div class="aspect-video w-full rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-navy relative group">
+                        <img src="${validThumbnail}" alt="${proj.title}" class="w-full h-full object-cover" onerror="this.src='${FALLBACK_IMAGE_SVG}'">
+                        <div class="absolute bottom-3 right-3 bg-navy/90 backdrop-blur text-white text-[10px] font-mono px-2.5 py-1 rounded-md flex items-center gap-1.5 border border-white/10 shadow-sm">
+                            <span class="w-1.5 h-1.5 rounded-full bg-orange animate-pulse"></span>
+                            <span>Case Study Overview</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                topMediaHTML = `
+                    <div class="aspect-video w-full rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-navy flex flex-col items-center justify-center p-6 text-center text-white space-y-2">
+                        <i class="fa-solid fa-chart-line text-4xl text-orange"></i>
+                        <span class="font-syne font-bold text-lg">${proj.title}</span>
+                        <span class="font-mono text-xs text-slate-300">Data Analytics & Engineering Architecture</span>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <!-- Case Study Header Banner -->
+                <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-1 rounded-full bg-orange/10 border border-orange/30 text-orange font-mono text-xs font-bold uppercase tracking-wider">${proj.category || 'Analytics'}</span>
+                            <span class="text-xs font-mono text-slate-400">Published ${formattedDate}</span>
+                        </div>
+                        <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800">🟢 Live Project</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h1 class="font-syne font-extrabold text-2xl sm:text-4xl text-navy leading-tight">${proj.title}</h1>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">${proj.description || ''}</p>
+                    </div>
+
+                    <!-- Two Main Action Buttons Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                        <div class="flex flex-wrap gap-2">
+                            ${tagsHTML}
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            ${actionButtonsHTML}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Dive Content Breakdown Grid -->
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Left Column: Top Media & ROI Impact -->
+                    <div class="lg:col-span-7 space-y-6">
+                        ${topMediaHTML}
+
+                        <!-- Quick Links Access Card -->
+
+
+                        <!-- ROI Impact Highlight Card with Markdown -->
+                        <div class="bg-gradient-to-br from-emerald-900 to-navy text-white p-6 rounded-2xl border border-emerald-500/30 shadow-lg space-y-2">
+                            <div class="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
+                                <i class="fa-solid fa-trophy"></i>
+                                <span>Measurable ROI & Commercial Impact</span>
+                            </div>
+                            <div class="text-sm sm:text-base text-emerald-100 leading-relaxed font-medium">
+                                ${renderMarkdown(proj.impact, 'Delivered data-driven decision optimization.', 'emerald')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Business Context & Code Snippet -->
+                    <div class="lg:col-span-5 space-y-6">
+                        
+                        <!-- Business Problem Statement with Markdown -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                            <h3 class="font-syne font-bold text-navy text-sm uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation text-orange"></i>
+                                <span>Business Problem & Context</span>
+                            </h3>
+                            <div class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                ${renderMarkdown(proj.problem, 'Operational logs required unified modeling to uncover inefficiencies.', 'light')}
+                            </div>
+                        </div>
+
+                        <!-- Technical Methodology with Markdown -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                            <h3 class="font-syne font-bold text-navy text-sm uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-diagram-project text-techblue"></i>
+                                <span>Pipeline & Technical Methodology</span>
+                            </h3>
+                            <div class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                                ${renderMarkdown(proj.methodology, 'Structured SQL aggregation, statistical feature extraction, and ML modeling.', 'light')}
+                            </div>
+                        </div>
+
+                        <!-- Code Transformation Snippet -->
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-white/10 shadow-md space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-mono text-xs text-orange font-bold flex items-center gap-1.5">
+                                    <i class="fa-solid fa-code"></i> Transformation Snippet
+                                </span>
+                                <button onclick="window.copyCodeSnippet()" class="text-[11px] font-mono bg-white/10 hover:bg-white/20 text-slate-300 px-2.5 py-1 rounded transition-colors flex items-center gap-1">
+                                    <i class="fa-solid fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre class="code-snippet p-4 rounded-xl text-[11px] overflow-x-auto max-h-64 border border-white/10"><code id="code-snippet-block">${escapeHtml(proj.codeSnippet || proj.code_snippet || '-- Query or model code snippet')}</code></pre>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderRelatedProjects() {
+            const container = document.getElementById('related-projects-grid');
+            if (!container) return;
+
+            const otherProjects = allProjects.filter(p => String(p.id) !== String(activeProjectId));
+
+            if (otherProjects.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center text-slate-400 py-6 font-mono text-xs">No additional case studies found.</div>`;
+                return;
+            }
+
+            container.innerHTML = otherProjects.map(proj => {
+                const formattedDate = `${proj.month || ''} ${proj.year || ''}`.trim() || '2026';
+                const rawImagePath = (proj.imagePath || proj.image_path || proj.coverImage || proj.cover_image || proj.image || '').trim();
+                const isActualImg = rawImagePath && (
+                    rawImagePath.match(/\.(png|jpg|jpeg|webp|svg|gif|avif)(\?.*)?$/i) ||
+                    rawImagePath.startsWith('assets/') ||
+                    rawImagePath.startsWith('images/') ||
+                    rawImagePath.startsWith('./')
+                );
+                const imgSrc = isActualImg ? rawImagePath : FALLBACK_IMAGE_SVG;
+
+                return `
+                    <article onclick="window.switchCaseStudy('${proj.id}')" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-orange/50 transition-all cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="aspect-video bg-navy relative overflow-hidden">
+                                <img src="${imgSrc}" alt="${proj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90 group-hover:opacity-100" onerror="this.src='${FALLBACK_IMAGE_SVG}'">
+                                <div class="absolute top-3 left-3 bg-navy/90 text-orange font-mono text-[10px] px-2 py-0.5 rounded border border-orange/30">${formattedDate}</div>
+                            </div>
+                            <div class="p-5 space-y-2">
+                                <span class="text-[10px] font-mono text-orange font-bold uppercase">${proj.category || 'Analytics'}</span>
+                                <h3 class="font-syne font-bold text-base text-navy group-hover:text-orange transition-colors line-clamp-2">${proj.title}</h3>
+                                <p class="text-xs text-slate-600 line-clamp-2">${proj.description || ''}</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 pt-0">
+                            <div class="w-full bg-slate-100 group-hover:bg-navy group-hover:text-white text-navy text-xs font-semibold py-2 rounded-xl transition-colors flex items-center justify-center gap-2 border border-slate-200">
+                                <span>Read Case Study</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function switchCaseStudy(id) {
+            activeProjectId = id;
+            const newUrl = `${window.location.pathname}?id=${id}`;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+            renderActiveCaseStudy();
+            renderRelatedProjects();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function copyCodeSnippet() {
+            const codeEl = document.getElementById('code-snippet-block');
+            if (!codeEl) return;
+            copyToClipboard(codeEl.innerText, "Code snippet copied to clipboard!");
+        }
+
+        window.switchCaseStudy = switchCaseStudy;
+        window.copyCodeSnippet = copyCodeSnippet;
+    </script>
+</body>
+</html>

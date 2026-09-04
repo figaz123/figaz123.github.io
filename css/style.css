@@ -1,0 +1,212 @@
+/* ==========================================================================DESIGN SYSTEM & CUSTOM STYLESHEETFigo Azzam De Fitrah — Data Analytics & Engineering Portfolio========================================================================== */
+/* STREAMING_CHUNK:Configuring root tokens and modern typography metrics... /
+/ --------------------------------------------------------------------------Design Tokens & Root Variables-------------------------------------------------------------------------- */
+:root {
+  --color-navy: #1C3968;
+  --color-navy-dark: #13284B;
+  --color-navy-light: #254A85;
+  --color-orange: #F68F45;
+  --color-orange-dark: #D97736;
+  --color-orange-glow: rgba(246, 143, 69, 0.2);
+  --color-techblue: #2563EB;
+  --color-slatebg: #F8FAFC;
+}
+
+/* --------------------------------------------------------------------------2. Base & Typography Normalization (Fixes Vertical Font Compression)-------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Enforce generous, proportional line-heights on display headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-syne,
+[class="font-syne"] {
+  line-height: 1.35 !important;
+  /* Prevents text from feeling squashed up and down */
+  letter-spacing: -0.01em;
+  font-feature-settings: "liga" 1,
+    "kern" 1;
+}
+
+/* Allow badges and small text blocks natural vertical padding without clamping */
+.font-mono {
+  line-height: 1.5;
+}
+
+/* STREAMING_CHUNK:Styling glassmorphism header and background patterns... /
+/ --------------------------------------------------------------------------3. Glassmorphism & Header Utilities-------------------------------------------------------------------------- */
+.glass-header {
+  background: rgba(28, 57, 104, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(28, 57, 104, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(28, 57, 104, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* STREAMING_CHUNK:Styling article prose and uncompressed markdown blocks... /
+/ --------------------------------------------------------------------------4. Code Snippet & Markdown Typography Theme-------------------------------------------------------------------------- */
+.code-snippet {
+  background: #0F172A;
+  color: #38BDF8;
+  font-family: 'DM Mono', monospace;
+  line-height: 1.6;
+}
+
+.article-prose {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  /* Generous vertical spacing for readability */
+  color: #334155;
+}
+
+.article-prose h1,
+.article-prose h2,
+.article-prose h3 {
+  font-family: 'Syne', sans-serif;
+  color: #1C3968;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.35;
+}
+
+.article-prose h1 {
+  font-size: 1.75rem;
+}
+
+.article-prose h2 {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 0.4rem;
+}
+
+.article-prose h3 {
+  font-size: 1.15rem;
+}
+
+.article-prose p {
+  margin-bottom: 1.35rem;
+  line-height: 1.75;
+}
+
+.article-prose code {
+  font-family: 'DM Mono', monospace;
+  background: #0F172A;
+  color: #38BDF8;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.375rem;
+  font-size: 0.85em;
+}
+
+.article-prose pre {
+  background: #0F172A;
+  color: #38BDF8;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.article-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.35rem;
+}
+
+.article-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.35rem;
+}
+
+.article-prose li {
+  margin-bottom: 0.4rem;
+  line-height: 1.7;
+}
+
+.article-prose blockquote {
+  border-left: 4px solid #F68F45;
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: #475569;
+  background: #FFF7ED;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin-bottom: 1.35rem;
+  line-height: 1.7;
+}
+
+/* STREAMING_CHUNK:Enforcing clean dark theme inputs for private CMS... /
+/ --------------------------------------------------------------------------5. Forms & CMS Input Utilities (Forced Dark Theme)-------------------------------------------------------------------------- */
+.cms-input {
+  width: 100% !important;
+  background-color: #020617 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.6rem 0.85rem !important;
+  font-size: 0.8rem !important;
+  font-family: 'DM Mono', monospace !important;
+  color: #F8FAFC !important;
+  line-height: 1.5 !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.cms-input:focus {
+  outline: none !important;
+  border-color: #F68F45 !important;
+  box-shadow: 0 0 0 2px rgba(246, 143, 69, 0.3) !important;
+  background-color: #020617 !important;
+  color: #F8FAFC !important;
+}
+
+.form-input {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #1E293B;
+  line-height: 1.5;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #F68F45;
+  box-shadow: 0 0 0 3px rgba(246, 143, 69, 0.2);
+}
+
+/* --------------------------------------------------------------------------6. Custom Scrollbars-------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1C3968;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F68F45;
+}

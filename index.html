@@ -1,196 +1,384 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6LS22EP7T"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-Y6LS22EP7T');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Figo Azzam De Fitrah — Data Analytics Portfolio</title>
+    <title>Figo Azzam De Fitrah — Data Analytics & Engineering Portfolio</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Tailwind CSS Engine CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#1C3968',
+                            dark: '#13284B',
+                            light: '#254A85'
+                        },
+                        orange: {
+                            DEFAULT: '#F68F45',
+                            dark: '#D97736',
+                            glow: 'rgba(246, 143, 69, 0.2)'
+                        },
+                        techblue: '#2563EB',
+                        slatebg: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['DM Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Unified Centralized Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="bg-slatebg text-slate-800 font-inter antialiased bg-grid-pattern min-h-screen flex flex-col justify-between">
 
-    <div class="bg-grid" aria-hidden="true"></div>
-    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
-    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+    <!-- DYNAMIC NAVIGATION HEADER (Injected by js/layout.js) -->
+    <header id="site-header"></header>
 
-    <div class="site-wrapper">
-
-        <header class="site-header">
-            <div class="header-eyebrow">
-                <span class="eyebrow-tag"><i class="fa-solid fa-circle-dot pulse-dot"></i> Available for Work</span>
-                <span class="eyebrow-divider">·</span>
-                <span class="eyebrow-mono">Bogor, Indonesia</span>
-            </div>
-            <h1 class="header-title">Welcome to My <span class="header-accent">Data Analytics Portfolio</span></h1>
-            <p class="header-sub">Turning complex datasets into confident business decisions.</p>
-        </header>
-
-        <nav class="tab-nav" id="tab-nav" role="tablist">
-            <div class="tab-nav-inner">
-                <button class="tab-btn active" data-target="experience-section" role="tab" aria-selected="true">
-                    <span class="tab-index mono">01</span>
-                    <span class="tab-label">Experience</span>
-                </button>
-                <button class="tab-btn" data-target="education-section" role="tab" aria-selected="false">
-                    <span class="tab-index mono">02</span>
-                    <span class="tab-label">Education & Skills</span>
-                </button>
-                <button class="tab-btn" data-target="portfolio-section" role="tab" aria-selected="false">
-                    <span class="tab-index mono">03</span>
-                    <span class="tab-label">Portfolio</span>
-                </button>
-            </div>
-        </nav>
-
-        <main class="content-grid">
-
-            <aside class="sidebar" aria-label="Profile">
-                <div class="sidebar-inner">
-                    <div class="profile-photo-wrap">
-                        <img src="./photo/Foto 3x4.jpg" alt="Figo Azzam De Fitrah" class="profile-photo"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                        <div class="profile-photo-fallback" style="display:none"><i class="fa-solid fa-user"></i></div>
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange/10 border border-orange/30 text-orange font-mono text-xs font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Available for Data Analyst & Analytics Engineering Roles
                     </div>
 
-                    <div class="profile-name-block">
-                        <h2 class="profile-name">Figo Azzam De Fitrah </h2>
-                        <p class="profile-role mono">Data-Driven Professional | Python, SQL, Analytics & Machine
-                            Learning</p>
-                    </div>
+                    <h1 class="font-syne text-4xl sm:text-5xl lg:text-6xl font-extrabold text-navy leading-tight">
+                        Turning Complex Datasets Into <span class="text-orange underline decoration-orange/30 decoration-wavy">Confident Decisions</span>
+                    </h1>
 
-                    <div class="profile-desc text-justify">I am a data-oriented professional with a background in
-                        project management and research, specializing in evidence-based problem-solving. Previously, I
-                        analyzed operator assessment data to expose bottlenecks, increasing workforce efficiency by 20%.
-                        Currently completing the RevoU Data Analytics Bootcamp, I combine SQL, Python, machine learning,
-                        and BI tools to preprocess complex datasets and deliver clean, actionable insights. I aim to
-                        apply my operational awareness and systematic thinking to a Data Analyst role, ensuring data
-                        consistently drives confident business decisions.</div>
+                    <p class="text-slate-600 text-lg max-w-2xl font-normal leading-relaxed">
+                        Data professional specializing in end-to-end analytics, statistical modeling, and interactive visualization using Python, SQL, and BI tools. Experienced in translating raw data and operational metrics into scalable, high-impact business decisions.                    </p>
 
-                    <div class="sidebar-divider"></div>
-
-                    <div class="profile-cta">
-                        <!-- <a href="https://docs.google.com/document/d/1sXdS9LCnjJFs9r8lD8Zs5CbBLmjLP8wKr8SCxG2saPc/export?format=pdf"
-                            target="_blank" class="btn-primary-cta">
-                            <i class="fa-solid fa-file-arrow-down"></i> Download My CV
-                        </a> -->
-                    </div>
-
-                    <div class="sidebar-divider"></div>
-
-                    <div class="contact-block">
-                        <h3 class="sidebar-section-label mono">// Contact</h3>
-                        <ul class="contact-list">
-                            <li><i class="fa-solid fa-envelope contact-icon"></i> <a
-                                    href="mailto:figoazzamdefitrah@gmail.com">figoazzam.work@gmail.com</a></li>
-                            <li><i class="fa-brands fa-linkedin contact-icon"></i> <a
-                                    href="https://www.linkedin.com/in/figoazzamdefitrah/" target="_blank">LinkedIn: Figo
-                                    Azzam De Fitrah</a></li>
-                            <li><i class="fa-brands fa-github contact-icon"></i> <a href="https://github.com/figaz123"
-                                    target="_blank">GitHub: figaz123</a></li>
-                            <li><i class="fa-solid fa-location-dot contact-icon"></i> <span>Bogor, Indonesia</span></li>
-                        </ul>
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="case_studies.html" class="px-6 py-3 rounded-xl bg-navy hover:bg-navy-dark text-white font-semibold text-sm transition-all shadow-lg flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-orange"></i>
+                            <span>Explore Case Studies</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/figoazzamdefitrah/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-xl bg-white border border-slate-300 hover:border-orange text-slate-700 hover:text-orange font-semibold text-sm transition-all shadow-sm flex items-center gap-2">
+                            <i class="fa-brands fa-linkedin text-techblue"></i>
+                            <span>LinkedIn Profile</span>
+                        </a>
                     </div>
                 </div>
-            </aside>
 
-            <div class="content-area">
+                <!-- LIVE METRIC HIGHLIGHT COUNTERS -->
+                <div id="metrics-container" class="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                        <div class="text-3xl lg:text-4xl font-mono font-bold text-navy">122K+</div>
+                        <div class="text-xs font-mono text-orange mt-1 uppercase font-semibold">Transactions Analyzed</div>
+                        <p class="text-xs text-slate-500 mt-2">Consolidated cross-channel transaction logs for OCA Indonesia.</p>
+                    </div>
 
-                <section id="experience-section" class="content-panel active" role="tabpanel">
-                    <h2 class="section-title">Work Experience</h2>
-                    <div id="experience-container" class="timeline"></div>
-                </section>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                        <div class="text-3xl lg:text-4xl font-mono font-bold text-orange">+60%</div>
+                        <div class="text-xs font-mono text-navy mt-1 uppercase font-semibold">Revenue Expansion</div>
+                        <p class="text-xs text-slate-500 mt-2">Price Elasticity modeling for PeopleU subscription tiers.</p>
+                    </div>
 
-                <section id="education-section" class="content-panel" role="tabpanel" style="display:none;">
-                    <h2 class="section-title">Education</h2>
-                    <div id="education-container" class="timeline"></div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                        <div class="text-3xl lg:text-4xl font-mono font-bold text-emerald-600">$2.15M</div>
+                        <div class="text-xs font-mono text-navy mt-1 uppercase font-semibold">Potential Loss Recovered</div>
+                        <p class="text-xs text-slate-500 mt-2">Predictive late-delivery model for NextHub Logistics.</p>
+                    </div>
 
-                    <h2 class="section-title" style="margin-top: 2rem;">Technical Toolkit</h2>
-                    <div id="skills-container" class="skills-grid"></div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md hover:shadow-lg transition-all hover:-translate-y-1">
+                        <div class="text-3xl lg:text-4xl font-mono font-bold text-techblue">97%</div>
+                        <div class="text-xs font-mono text-orange mt-1 uppercase font-semibold">Model Accuracy</div>
+                        <p class="text-xs text-slate-500 mt-2">Patented FMCW Radar LSTM classification system.</p>
+                    </div>
+                </div>
 
-                    <h2 class="section-title" style="margin-top: 2rem;">Soft Skills</h2>
-                    <div id="soft-skills-container" class="soft-skills-grid"></div>
+            </div>
+        </div>
+    </section>
 
-                    <h2 class="section-title" style="margin-top: 2rem;">Languages</h2>
-                    <div id="languages-container" class="languages-grid"></div>
-                </section>
+    <!-- FEATURED BUSINESS CASE STUDIES -->
+    <section id="case-studies" class="py-16 bg-white border-y border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">Business Case Studies</span>
+                    <h2 class="font-syne text-3xl sm:text-4xl font-bold text-navy mt-1">Impact-Driven Analytics Projects</h2>
+                </div>
 
-                <section id="portfolio-section" class="content-panel" role="tabpanel" style="display:none;">
-                    <div class="portfolio-header">
-                        <h2 class="section-title">Selected Projects</h2>
-                        <div class="portfolio-filters-dropdowns">
-                            <select id="category-select" class="filter-select">
-                                <option value="all">All Categories</option>
-                                <option value="analytics">Data Analytics</option>
-                                <option value="ml">Machine Learning</option>
-                            </select>
+                <div class="flex flex-wrap items-center gap-3">
+                    <!-- CATEGORY FILTER BUTTONS -->
+                    <div class="flex flex-wrap gap-2" id="filter-buttons">
+                        <button onclick="window.filterProjects('all', event)" class="filter-btn active px-4 py-2 rounded-lg text-xs font-mono font-semibold bg-navy text-white transition-all">All Projects</button>
+                        <button onclick="window.filterProjects('analytics', event)" class="filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Analytics & SQL</button>
+                        <button onclick="window.filterProjects('ml', event)" class="filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Predictive ML</button>
+                        <button onclick="window.filterProjects('strategy', event)" class="filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Pricing & Strategy</button>
+                    </div>
 
-                            <select id="year-select" class="filter-select">
-                                <option value="all">All Years</option>
-                                <!-- Dynamic years here -->
-                            </select>
+                    <!-- Direct Link to Standalone Case Studies Page -->
+                    <a href="case_studies.html" class="px-3.5 py-2 rounded-lg text-xs font-mono font-semibold bg-orange text-white hover:bg-orange-dark transition-all flex items-center gap-1.5 shadow-sm" title="Open Full Case Study Reader">
+                        <i class="fa-solid fa-book-open text-xs"></i>
+                        <span>Full Reader</span>
+                    </a>
+                </div>
+            </div>
 
-                            <select id="month-select" class="filter-select">
-                                <option value="all">All Months</option>
-                                <!-- Dynamic months here -->
-                            </select>
+            <!-- CASE STUDY GRID (Hydrated dynamically by js/main.js) -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="project-cards-container">
+                <div class="col-span-full text-center text-slate-400 py-12 font-mono text-xs animate-pulse">
+                    Loading portfolio case studies...
+                </div>
+            </div>
+        </div>
+    </section>
 
-                            <button id="sort-year-btn" class="filter-btn" data-order="desc" title="Sort by Date">
-                                <i class="fa-solid fa-arrow-down-9-1"></i> Date
-                            </button>
+    <!-- TECHNICAL ARSENAL & WORKFLOW PIPELINE -->
+    <section id="technical-arsenal" class="py-16 bg-slatebg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">End-to-End Technical Stack</span>
+                <h2 class="font-syne text-3xl sm:text-4xl font-bold text-navy mt-1">Data Engineering & Analytics Pipeline</h2>
+                <p class="text-slate-600 text-sm mt-2">Structured layer-by-layer workflow from raw operational data to executive decisions.</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <!-- Layer 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="w-8 h-8 rounded-lg bg-navy/10 text-navy font-mono font-bold text-xs flex items-center justify-center mb-4">01</div>
+                    <h3 class="font-syne font-bold text-lg text-navy mb-2">Ingestion & ETL</h3>
+                    <p class="text-xs text-slate-500 mb-4">Extracting, cleaning, and transforming complex unstructured datasets.</p>
+                    <ul class="font-mono text-xs text-slate-700 space-y-1.5">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> SQL (CTEs, Windowing)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> Python (Pandas, NumPy)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> BigQuery & PostgreSQL</li>
+                    </ul>
+                </div>
+
+                <!-- Layer 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="w-8 h-8 rounded-lg bg-techblue/10 text-techblue font-mono font-bold text-xs flex items-center justify-center mb-4">02</div>
+                    <h3 class="font-syne font-bold text-lg text-navy mb-2">Modeling & Analytics</h3>
+                    <p class="text-xs text-slate-500 mb-4">Applying statistical hypothesis testing, segmentation, and machine learning.</p>
+                    <ul class="font-mono text-xs text-slate-700 space-y-1.5">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> Scikit-learn (K-Means)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> Meta Prophet Forecasting</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> TensorFlow / Keras (DL)</li>
+                    </ul>
+                </div>
+
+                <!-- Layer 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="w-8 h-8 rounded-lg bg-orange/10 text-orange font-mono font-bold text-xs flex items-center justify-center mb-4">03</div>
+                    <h3 class="font-syne font-bold text-lg text-navy mb-2">BI & Storytelling</h3>
+                    <p class="text-xs text-slate-500 mb-4">Building interactive single-source-of-truth dashboards for C-level leadership.</p>
+                    <ul class="font-mono text-xs text-slate-700 space-y-1.5">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> Looker Studio & Tableau</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> Executive Slide Storytelling</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> SLA & Metric Governance</li>
+                    </ul>
+                </div>
+
+                <!-- Layer 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 font-mono font-bold text-xs flex items-center justify-center mb-4">04</div>
+                    <h3 class="font-syne font-bold text-lg text-navy mb-2">Deployment & Storage</h3>
+                    <p class="text-xs text-slate-500 mb-4">Publishing version-controlled static web assets & live API databases.</p>
+                    <ul class="font-mono text-xs text-slate-700 space-y-1.5">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> GitHub Pages & CI/CD</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> Node.js VPS API Server</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange"></i> Streamlit & Colab</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTICLES & TECHNICAL WRITING SECTION -->
+    <section id="articles" class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">Articles & Writing</span>
+                    <h2 class="font-syne text-3xl sm:text-4xl font-bold text-navy mt-1">Technical Notes & Publications</h2>
+                </div>
+
+                <!-- Link to Standalone Articles Page -->
+                <a href="articles.html" class="px-4 py-2 rounded-lg text-xs font-mono font-semibold bg-navy hover:bg-orange text-white transition-all flex items-center gap-2 w-fit">
+                    <span>View All Articles</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <!-- ARTICLES GRID (Hydrated dynamically by js/main.js) -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="articles-container">
+                <div class="col-span-full text-center text-slate-400 py-12 font-mono text-xs animate-pulse">
+                    Loading articles and technical notes...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACT-DRIVEN CAREER TIMELINE -->
+    <section id="impact-timeline" class="py-16 bg-slatebg border-t border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">Track Record</span>
+                    <h2 class="font-syne text-3xl font-bold text-navy mt-1">Impact-Driven Professional Journey</h2>
+                </div>
+
+                <!-- Link to Standalone Impact Records Page -->
+                <a href="impact_records.html" class="px-4 py-2 rounded-lg text-xs font-mono font-semibold bg-navy hover:bg-orange text-white transition-all flex items-center gap-2 w-fit">
+                    <span>Full Impact & Records Page</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:-ml-px before:w-0.5 before:bg-slate-200">
+                
+                <!-- Experience 1 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-navy text-white font-mono text-xs shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-md">
+                        01
+                    </div>
+                    <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-orange font-bold">Aug 2024 – Present</span>
+                            <span class="text-[11px] font-mono bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Full-Time</span>
+                        </div>
+                        <h3 class="font-syne font-bold text-lg text-navy">Production Workforce Development - Data & Knowledge</h3>
+                        <p class="text-xs text-slate-500 font-medium">PT Rekayasa Cakrawala Resources (Assigned to PT Pupuk Indonesia)</p>
+                        <p class="text-xs text-slate-600 leading-relaxed pt-2">
+                            Engineered centralized knowledge system and automated Looker Studio assessment dashboards, eliminating manual spreadsheets and increasing workforce evaluation efficiency by <strong>20%</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-navy text-white font-mono text-xs shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-md">
+                        02
+                    </div>
+                    <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-orange font-bold">Dec 2023 – Dec 2024</span>
+                            <span class="text-[11px] font-mono bg-blue-100 text-blue-800 px-2 py-0.5 rounded">AI / Engineering</span>
+                        </div>
+                        <h3 class="font-syne font-bold text-lg text-navy">Resident AI Engineer</h3>
+                        <p class="text-xs text-slate-500 font-medium">Pukul Enam</p>
+                        <p class="text-xs text-slate-600 leading-relaxed pt-2">
+                            Designed structured preprocessing pipelines handling <strong>37,000+ data slices</strong> to streamline U-Net medical segmentation model training and comparative loss-function analysis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Experience 3 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-navy text-white font-mono text-xs shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-md">
+                        03
+                    </div>
+                    <div class="w-[calc(100%-2.5rem)] md:w-[calc(50%-2.5rem)] bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-orange font-bold">Aug 2022 – Aug 2023</span>
+                            <span class="text-[11px] font-mono bg-purple-100 text-purple-800 px-2 py-0.5 rounded">Research</span>
+                        </div>
+                        <h3 class="font-syne font-bold text-lg text-navy">Research Assistant — FMCW Radar ML</h3>
+                        <p class="text-xs text-slate-500 font-medium">Telkom University</p>
+                        <p class="text-xs text-slate-600 leading-relaxed pt-2">
+                            Developed an Bi-LSTM classification model for FMCW radar fall detection achieving <strong>93% accuracy</strong>. Co-authored peer-reviewed paper and secured a <strong>Granted Patent</strong>.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DYNAMIC FOOTER (Injected by js/layout.js) -->
+    <footer id="site-footer"></footer>
+
+    <!-- CASE STUDY DEEP-DIVE MODAL (Markdown Supported) -->
+    <div id="case-study-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 relative flex flex-col justify-between">
+            
+            <div class="p-6 md:p-8 space-y-6">
+                <!-- Modal Header -->
+                <div class="flex items-start justify-between border-b border-slate-200 pb-4">
+                    <div>
+                        <span id="modal-date" class="font-mono text-xs text-orange font-bold uppercase">MAY 2026</span>
+                        <h2 id="modal-title" class="font-syne font-bold text-2xl text-navy mt-1">Project Title</h2>
+                    </div>
+                    <button onclick="window.closeCaseStudyModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Body Content with Div Wrappers for Clean Markdown Lists -->
+                <div class="space-y-6 text-slate-700 text-sm">
+                    <div>
+                        <h4 class="font-syne font-bold text-navy uppercase text-xs tracking-wider mb-2">// Business Problem Statement</h4>
+                        <div id="modal-problem" class="bg-slatebg p-4 rounded-xl border border-slate-200 leading-relaxed text-xs sm:text-sm">
+                            Problem description...
                         </div>
                     </div>
 
-                    <div id="portfolio-container" class="portfolio-grid"></div>
-                </section>
-
-                <!-- <div class="closing-statement text-center mt-2">
-                    <h3 class="mono">LET'S KEEP IN TOUCH</h3>
-                    <p>Thank you for taking the time to visit my portfolio!</p>
-                </div> -->
-                <footer class="site-footer">
-                    <h2 class="footer-title"><br></h2> LET'S KEEP IN TOUCH</h2>
-                    <p class="footer-sub">Thank you for taking the time to visit my portfolio!</p>
-                    <br>
-                    <div class="footer-links">
-                        <a href="mailto:figoazzam.work@gmail.com" class="btn-solid"><i class="fa-solid fa-envelope"></i>
-                            Email Me</a>
-                        <a href="https://www.linkedin.com/in/figoazzamdefitrah/" target="_blank" class="btn-outline"><i
-                                class="fa-brands fa-linkedin"></i> Connect on LinkedIn</a>
+                    <div>
+                        <h4 class="font-syne font-bold text-navy uppercase text-xs tracking-wider mb-2">// Data Pipeline & Methodology</h4>
+                        <div id="modal-methodology" class="bg-slatebg p-4 rounded-xl border border-slate-200 leading-relaxed text-xs sm:text-sm">
+                            Methodology description...
+                        </div>
                     </div>
 
-                    <div
-                        style="margin-top: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto;">
-                        <p
-                            style="color: var(--text-on-dark-muted); font-size: 0.8rem; margin-bottom: 12px; font-family: 'DM Mono', monospace; letter-spacing: 1.5px; text-transform: uppercase;">
-                            Total Page Views
-                        </p>
-                        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Ffigaz123.github.io&count_bg=%23F68F45&title_bg=%231C3968&icon=&icon_color=%23E7E7E7&title=VISITORS&edge_flat=true"
-                            alt="Visitor Count"
-                            style="border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transform: scale(1.1);">
+                    <div>
+                        <h4 class="font-syne font-bold text-navy uppercase text-xs tracking-wider mb-2">// SQL / Python Transformation Snippet</h4>
+                        <pre class="code-snippet p-4 rounded-xl text-xs overflow-x-auto"><code id="modal-code">-- SQL Query Sample</code></pre>
                     </div>
-                </footer>
 
+                    <div>
+                        <h4 class="font-syne font-bold text-navy uppercase text-xs tracking-wider mb-2">// Measurable ROI & Impact</h4>
+                        <div id="modal-impact" class="bg-emerald-50 border border-emerald-200 text-emerald-900 p-4 rounded-xl text-xs sm:text-sm leading-relaxed font-medium">
+                            Impact summary...
+                        </div>
+                    </div>
+                </div>
             </div>
-        </main>
+
+            <!-- Modal Footer Links -->
+            <div id="modal-action-buttons" class="p-6 bg-slatebg border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 rounded-b-3xl">
+                <a id="modal-link-primary" href="#" target="_blank" rel="noopener noreferrer" class="bg-navy hover:bg-orange text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>Open Live Deck / Dashboard</span>
+                </a>
+                <button onclick="window.closeCaseStudyModal()" class="text-xs text-slate-500 hover:text-slate-800 font-semibold">Close Preview</button>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <!-- NOTIFICATION TOAST (Controlled by js/layout.js) -->
+    <div id="toast-msg" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white font-mono text-xs px-4 py-3 rounded-xl shadow-2xl border border-white/20 hidden flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-text">Notification message</span>
+    </div>
 
+    <!-- Modular Entry Script -->
+    <script type="module" src="js/main.js"></script>
+</body>
 </html>

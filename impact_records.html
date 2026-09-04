@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact & Track Record — Figo Azzam De Fitrah Portfolio</title>
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Tailwind CSS Engine CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { DEFAULT: '#1C3968', dark: '#13284B', light: '#254A85' },
+                        orange: { DEFAULT: '#F68F45', dark: '#D97736', glow: 'rgba(246, 143, 69, 0.2)' },
+                        techblue: '#2563EB',
+                        slatebg: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['DM Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Centralized Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-slatebg text-slate-800 font-inter antialiased bg-grid-pattern min-h-screen flex flex-col justify-between">
+
+    <!-- DYNAMIC NAVIGATION HEADER (Injected by js/layout.js) -->
+    <header id="site-header"></header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-12">
+        
+        <!-- Breadcrumb Navigation Bar -->
+        <nav class="flex items-center gap-2 text-xs font-mono text-slate-500 bg-white/80 p-3 rounded-xl border border-slate-200/80 shadow-sm">
+            <a href="index.html" class="hover:text-orange transition-colors">Home</a>
+            <i class="fa-solid fa-chevron-right text-[10px] opacity-40"></i>
+            <span class="text-navy font-semibold">Impact & Track Record</span>
+        </nav>
+
+        <!-- PAGE HERO BANNER -->
+        <section class="bg-navy text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-xl border border-white/10">
+            <div class="relative z-10 max-w-3xl space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange/20 border border-orange/40 text-orange font-mono text-xs font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-trophy"></i>
+                    <span>Commercial Impact & Track Record</span>
+                </div>
+                <h1 class="font-syne text-3xl sm:text-5xl font-extrabold leading-tight">
+                    Professional Experience & Technical Journey
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    A comprehensive overview of operational impact, workforce data engineering, predictive machine learning research, and analytical problem-solving across corporate and research environments.
+                </p>
+                
+                <div class="pt-2 flex flex-wrap gap-4 font-mono text-xs">
+                    <div class="bg-white/10 px-4 py-2 rounded-xl border border-white/10 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-orange"></i>
+                        <span>3+ Years Applied Analytics</span>
+                    </div>
+                    <div class="bg-white/10 px-4 py-2 rounded-xl border border-white/10 flex items-center gap-2">
+                        <i class="fa-solid fa-certificate text-emerald-400"></i>
+                        <span>Patent Holder & Published Author</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: PROFESSIONAL EXPERIENCES TIMELINE -->
+        <section class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">// Work History</span>
+                    <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">Professional Experience</h2>
+                </div>
+                <span class="text-xs font-mono text-slate-500">Live synchronized track record</span>
+            </div>
+
+            <!-- Dynamic Experience Cards Container -->
+            <div id="experiences-container" class="space-y-6">
+                <!-- Skeleton Loader -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm animate-pulse space-y-3">
+                    <div class="h-5 bg-slate-200 rounded w-1/3"></div>
+                    <div class="h-4 bg-slate-100 rounded w-1/4"></div>
+                    <div class="h-16 bg-slate-100 rounded"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: EDUCATION & CERTIFICATIONS -->
+        <section class="space-y-6 pt-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">// Academic Background</span>
+                    <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">Education & Certifications</h2>
+                </div>
+            </div>
+
+            <!-- Dynamic Education Grid -->
+            <div id="education-container" class="grid md:grid-cols-2 gap-6">
+                <!-- Skeleton Loader -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm animate-pulse space-y-3">
+                    <div class="h-5 bg-slate-200 rounded w-1/2"></div>
+                    <div class="h-4 bg-slate-100 rounded w-1/3"></div>
+                    <div class="h-12 bg-slate-100 rounded"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TECHNICAL SKILLS & ARSENAL -->
+        <section class="space-y-6 pt-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">// Competencies</span>
+                    <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">Skills & Technical Arsenal</h2>
+                </div>
+            </div>
+
+            <!-- Dynamic Skills Grid -->
+            <div id="skills-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Skeleton Loader -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm animate-pulse space-y-3">
+                    <div class="h-5 bg-slate-200 rounded w-1/2"></div>
+                    <div class="h-10 bg-slate-100 rounded"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- DYNAMIC FOOTER (Injected by js/layout.js) -->
+    <footer id="site-footer"></footer>
+
+    <!-- NOTIFICATION TOAST (Controlled by js/layout.js) -->
+    <div id="toast-msg" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white font-mono text-xs px-4 py-3 rounded-xl shadow-2xl border border-white/20 hidden flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-text">Notification message</span>
+    </div>
+
+    <!-- MODULAR CLIENT ENGINE SCRIPT -->
+    <script type="module">
+        import { fetchPortfolioData } from './js/api.js';
+        import { renderHeader, renderFooter } from './js/layout.js';
+
+        // --------------------------------------------------------------------------
+        // 1. Global State Management
+        // --------------------------------------------------------------------------
+        let portfolioData = {
+            experiences: [],
+            education: [],
+            skills: []
+        };
+
+        // --------------------------------------------------------------------------
+        // 2. Lifecycle & Entry Point
+        // --------------------------------------------------------------------------
+        async function init() {
+            renderHeader('impact');
+            renderFooter();
+            await loadImpactRecordsData();
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+
+        // --------------------------------------------------------------------------
+        // 3. Data Fetch Engine
+        // --------------------------------------------------------------------------
+        async function loadImpactRecordsData() {
+            const data = await fetchPortfolioData();
+
+            portfolioData.experiences = filterPublished(data.experiences);
+            portfolioData.education = filterPublished(data.education);
+            portfolioData.skills = filterPublished(data.skills);
+
+            renderExperiences();
+            renderEducation();
+            renderSkills();
+        }
+
+        function filterPublished(arr) {
+            return (arr || []).filter(item => 
+                item && item.published !== 'draft' && item.published !== 'hidden' && item.published !== 'false'
+            );
+        }
+
+        // --------------------------------------------------------------------------
+        // 4. Section Render Engines
+        // --------------------------------------------------------------------------
+        function renderExperiences() {
+            const container = document.getElementById('experiences-container');
+            if (!container) return;
+
+            if (portfolioData.experiences.length === 0) {
+                container.innerHTML = `<div class="bg-white p-6 rounded-2xl text-center text-slate-400 font-mono text-xs">No experience records found.</div>`;
+                return;
+            }
+
+            container.innerHTML = portfolioData.experiences.map((exp) => {
+                const role = exp.role || "Role Title";
+                const company = exp.company || "Company Name";
+                const date = exp.period || exp.date || "2024";
+                const location = exp.location || "Indonesia";
+                const description = exp.description || exp.companyDescription || "";
+                
+                const tasksList = exp.tasks || exp.bullets || [];
+                const tasksHTML = tasksList.map(task => `
+                    <li class="flex items-start gap-2.5 text-xs text-slate-700 leading-relaxed">
+                        <i class="fa-solid fa-circle-check text-orange mt-0.5 shrink-0 text-[11px]"></i>
+                        <span>${task}</span>
+                    </li>
+                `).join('');
+
+                return `
+                    <article class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 border-b border-slate-100 pb-4">
+                            <div>
+                                <span class="font-mono text-xs text-orange font-bold uppercase tracking-wider">${company}</span>
+                                <h3 class="font-syne font-bold text-xl text-navy mt-0.5">${role}</h3>
+                            </div>
+                            <div class="flex flex-col sm:items-end font-mono text-xs text-slate-500">
+                                <span class="px-2.5 py-1 rounded-md bg-navy/10 text-navy font-semibold">${date}</span>
+                                <span class="text-[11px] mt-1"><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>${location}</span>
+                            </div>
+                        </div>
+
+                        ${description ? `<p class="text-xs text-slate-600 leading-relaxed font-medium">${description}</p>` : ''}
+
+                        ${tasksList.length > 0 ? `
+                            <div class="space-y-2 pt-2">
+                                <span class="font-mono text-[11px] text-navy font-bold uppercase tracking-wider">// Key Achievements & Impact:</span>
+                                <ul class="space-y-2">
+                                    ${tasksHTML}
+                                </ul>
+                            </div>
+                        ` : ''}
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function renderEducation() {
+            const container = document.getElementById('education-container');
+            if (!container) return;
+
+            if (portfolioData.education.length === 0) {
+                container.innerHTML = `<div class="col-span-full bg-white p-6 rounded-2xl text-center text-slate-400 font-mono text-xs">No education records found.</div>`;
+                return;
+            }
+
+            container.innerHTML = portfolioData.education.map(edu => {
+                return `
+                    <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-sm space-y-3 hover:shadow-md transition-shadow">
+                        <div class="flex items-start justify-between gap-2">
+                            <div>
+                                <span class="font-mono text-xs text-orange font-bold uppercase">${edu.institution || ''}</span>
+                                <h3 class="font-syne font-bold text-lg text-navy mt-0.5">${edu.degree || ''}</h3>
+                            </div>
+                            <span class="font-mono text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded shrink-0">${edu.date || ''}</span>
+                        </div>
+                        ${edu.score ? `<div class="inline-block font-mono text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded">${edu.score}</div>` : ''}
+                        <p class="text-xs text-slate-600 leading-relaxed">${edu.description || ''}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderSkills() {
+            const container = document.getElementById('skills-container');
+            if (!container) return;
+
+            if (portfolioData.skills.length === 0) {
+                container.innerHTML = `<div class="col-span-full bg-white p-6 rounded-2xl text-center text-slate-400 font-mono text-xs">No skills found.</div>`;
+                return;
+            }
+
+            container.innerHTML = portfolioData.skills.map(skill => {
+                const iconClass = skill.icon || "fa-solid fa-code";
+
+                return `
+                    <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-sm space-y-3 hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-navy/10 text-navy flex items-center justify-center text-lg">
+                                <i class="${iconClass}"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-syne font-bold text-base text-navy">${skill.name || ''}</h3>
+                                <span class="font-mono text-[10px] text-orange uppercase font-semibold">Verified Competency</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed font-mono">${skill.desc || skill.description || ''}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>

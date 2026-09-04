@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Articles & Notes — Figo Azzam Portfolio</title>
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Tailwind CSS Engine CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { DEFAULT: '#1C3968', dark: '#13284B', light: '#254A85' },
+                        orange: { DEFAULT: '#F68F45', dark: '#D97736', glow: 'rgba(246, 143, 69, 0.2)' },
+                        techblue: '#2563EB',
+                        slatebg: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['DM Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Shared Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-slatebg text-slate-800 font-inter antialiased bg-grid-pattern min-h-screen flex flex-col justify-between">
+
+    <!-- DYNAMIC NAVIGATION HEADER (Injected by js/layout.js) -->
+    <header id="site-header"></header>
+
+    <!-- MAIN ARTICLE CONTENT AREA -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-10">
+        
+        <!-- Breadcrumb Navigation Bar -->
+        <nav class="flex items-center gap-2 text-xs font-mono text-slate-500 bg-white/80 p-3 rounded-xl border border-slate-200/80 shadow-sm">
+            <a href="index.html" class="hover:text-orange transition-colors">Home</a>
+            <i class="fa-solid fa-chevron-right text-[10px] opacity-40"></i>
+            <a href="articles.html" class="hover:text-orange transition-colors">Articles</a>
+            <i class="fa-solid fa-chevron-right text-[10px] opacity-40"></i>
+            <span id="breadcrumb-title" class="text-navy font-semibold truncate">Loading Article...</span>
+        </nav>
+
+        <!-- Dynamic Main Article Reader Container -->
+        <div id="active-article-container" class="space-y-8">
+            <div class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 text-center space-y-4 shadow-sm animate-pulse">
+                <div class="w-12 h-12 rounded-2xl bg-slate-200 mx-auto"></div>
+                <div class="h-6 bg-slate-200 rounded max-w-md mx-auto"></div>
+                <div class="h-4 bg-slate-100 rounded max-w-sm mx-auto"></div>
+                <div class="text-xs font-mono text-slate-400">Fetching technical note from live API...</div>
+            </div>
+        </div>
+
+        <!-- Related Technical Articles & Writeups Grid -->
+        <section class="pt-8 border-t border-slate-200/80 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">// Technical Knowledge</span>
+                    <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">More Articles & Technical Notes</h2>
+                </div>
+                <span class="text-xs font-mono text-slate-500">Click any card below to switch articles</span>
+            </div>
+
+            <div id="related-articles-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+    </main>
+
+    <!-- DYNAMIC FOOTER (Injected by js/layout.js) -->
+    <footer id="site-footer"></footer>
+
+    <!-- Notification Toast Message Container -->
+    <div id="toast-msg" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white font-mono text-xs px-4 py-3 rounded-xl shadow-2xl border border-white/20 hidden flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-text">Link copied to clipboard!</span>
+    </div>
+
+    <!-- CLIENT MODULE SCRIPT -->
+    <script type="module">
+        import { fetchPortfolioData, isValidUrl } from './js/api.js';
+        import { renderHeader, renderFooter, showToast, copyToClipboard } from './js/layout.js';
+
+        let allArticles = [];
+        let activeArticleId = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            renderHeader('articles');
+            renderFooter();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            activeArticleId = urlParams.get('id');
+
+            await loadArticles();
+        });
+
+        window.addEventListener('popstate', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            activeArticleId = urlParams.get('id');
+            renderActiveArticle();
+            renderRelatedArticles();
+        });
+
+        async function loadArticles() {
+            const portfolioData = await fetchPortfolioData();
+            // Filter published articles only
+            allArticles = (portfolioData.articles || []).filter(
+                a => a && a.published !== 'draft' && a.published !== 'hidden' && a.published !== 'false'
+            );
+
+            if (allArticles.length === 0) {
+                renderEmptyState();
+                return;
+            }
+
+            if (!activeArticleId || !allArticles.some(a => a.id === activeArticleId)) {
+                activeArticleId = allArticles[0].id;
+            }
+
+            renderActiveArticle();
+            renderRelatedArticles();
+        }
+
+        function renderEmptyState() {
+            const container = document.getElementById('active-article-container');
+            const breadcrumbTitle = document.getElementById('breadcrumb-title');
+            const relatedContainer = document.getElementById('related-articles-grid');
+
+            if (breadcrumbTitle) breadcrumbTitle.innerText = 'No Published Notes';
+            if (container) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-3xl p-10 sm:p-16 border border-slate-200 text-center space-y-4 shadow-sm">
+                        <div class="w-14 h-14 rounded-2xl bg-navy/10 text-navy flex items-center justify-center mx-auto text-2xl">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                        <h2 class="font-syne font-bold text-2xl text-navy">No Published Technical Notes</h2>
+                        <div class="pt-2 flex flex-wrap justify-center gap-3 font-mono text-xs">
+                            <a href="index.html" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold px-4 py-2.5 rounded-xl transition-all border border-slate-200">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Back to Home</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+            if (relatedContainer) {
+                relatedContainer.innerHTML = `<div class="col-span-full text-center text-slate-400 py-6 font-mono text-xs">No additional articles available.</div>`;
+            }
+        }
+
+        function parseMarkdown(mdText) {
+            if (!mdText) return '<p class="text-slate-500 italic">No detailed content provided for this note.</p>';
+
+            let html = mdText;
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            html = html.replace(/```([a-z]*)\n([\s\S]*?)\n```/gim, '<pre><code>$2</code></pre>');
+            html = html.replace(/`([^`]+)`/gim, '<code>$1</code>');
+            html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+            html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
+
+            const paragraphs = html.split(/\n\n+/);
+            html = paragraphs.map(p => {
+                p = p.trim();
+                if (p.startsWith('<h') || p.startsWith('<pre') || p.startsWith('<blockquote')) {
+                    return p;
+                }
+                return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+            }).join('');
+
+            return html;
+        }
+
+        function renderActiveArticle() {
+            const container = document.getElementById('active-article-container');
+            const breadcrumbTitle = document.getElementById('breadcrumb-title');
+            if (!container) return;
+
+            const art = allArticles.find(a => a.id === activeArticleId) || allArticles[0];
+            if (!art) {
+                renderEmptyState();
+                return;
+            }
+
+            activeArticleId = art.id;
+
+            if (breadcrumbTitle) breadcrumbTitle.innerText = art.title;
+            document.title = `${art.title} — Figo Azzam Technical Notes`;
+
+            const articleDate = art.date || '2026';
+            const articleStatus = art.status || 'Published';
+            const articleLink = art.link || art.url || '';
+            const hasExternalLink = isValidUrl(articleLink);
+            const formattedContent = parseMarkdown(art.content || art.summary || '');
+
+            container.innerHTML = `
+                <article class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-8">
+                    <div class="space-y-4 border-b border-slate-200/80 pb-6">
+                        <div class="flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex items-center gap-2">
+                                <span class="px-3 py-1 rounded-full bg-navy/10 border border-navy/20 text-navy font-mono text-xs font-bold uppercase tracking-wider">${articleStatus}</span>
+                                <span class="text-xs font-mono text-slate-400">Published ${articleDate}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="window.shareArticleLink()" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-mono font-semibold transition-colors flex items-center gap-1.5 border border-slate-200">
+                                    <i class="fa-solid fa-share-nodes text-orange"></i> Share
+                                </button>
+                                ${hasExternalLink ? `
+                                    <a href="${articleLink}" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-lg bg-navy hover:bg-orange text-white text-xs font-mono font-semibold transition-all flex items-center gap-1.5 shadow">
+                                        <i class="fa-solid fa-external-link"></i> External Link
+                                    </a>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <h1 class="font-syne font-extrabold text-2xl sm:text-4xl text-navy leading-tight">${art.title}</h1>
+
+                        ${art.summary ? `
+                            <div class="p-4 rounded-2xl bg-slatebg border border-slate-200 text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">
+                                <strong class="text-orange font-mono uppercase text-xs block mb-1">// Summary</strong>
+                                ${art.summary}
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="article-prose">
+                        ${formattedContent}
+                    </div>
+
+                    <div class="pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slatebg p-6 rounded-2xl border">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-orange flex items-center justify-center font-syne font-bold text-white text-xl shadow">FA</div>
+                            <div>
+                                <span class="font-syne font-bold text-navy text-sm block">Figo Azzam De Fitrah</span>
+                                <span class="font-mono text-xs text-slate-500">Data Analytics & Engineering Professional</span>
+                            </div>
+                        </div>
+                        <a href="https://www.linkedin.com/in/figoazzamdefitrah/" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-navy hover:bg-orange text-white font-semibold text-xs transition-colors flex items-center gap-2 shadow-sm">
+                            <i class="fa-brands fa-linkedin text-orange"></i>
+                            <span>Connect on LinkedIn</span>
+                        </a>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderRelatedArticles() {
+            const container = document.getElementById('related-articles-grid');
+            if (!container) return;
+
+            const otherArticles = allArticles.filter(a => a.id !== activeArticleId);
+
+            if (otherArticles.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center text-slate-400 py-6 font-mono text-xs">No additional articles found.</div>`;
+                return;
+            }
+
+            container.innerHTML = otherArticles.map(art => {
+                const articleDate = art.date || '2026';
+                const articleStatus = art.status || 'Technical Note';
+
+                return `
+                    <article onclick="window.switchArticle('${art.id}')" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-xl hover:border-orange/50 transition-all cursor-pointer group flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-xs font-mono">
+                                <span class="text-orange font-bold uppercase">${articleDate}</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-700">${articleStatus}</span>
+                            </div>
+                            <h3 class="font-syne font-bold text-base text-navy group-hover:text-orange transition-colors line-clamp-2">${art.title}</h3>
+                            <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed">${art.summary || ''}</p>
+                        </div>
+
+                        <div class="pt-2">
+                            <div class="w-full bg-slate-100 group-hover:bg-navy group-hover:text-white text-navy text-xs font-semibold py-2 rounded-xl transition-colors flex items-center justify-center gap-2 border border-slate-200">
+                                <span>Read Full Article</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        window.switchArticle = function(id) {
+            activeArticleId = id;
+            const newUrl = `${window.location.pathname}?id=${id}`;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+            renderActiveArticle();
+            renderRelatedArticles();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.shareArticleLink = function() {
+            copyToClipboard(window.location.href, "Article link copied to clipboard!");
+        };
+    </script>
+</body>
+</html>
