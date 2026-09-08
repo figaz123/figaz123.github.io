@@ -37,19 +37,18 @@ Personal portfolio website of mine. Showcasing end-to-end data analytics, machin
 ---
 
 ## ⚙️ Key Architectural Features
+### 1. Responsive Multi-Tier Case Study Reader
 
-### 1. Responsive 3-Tier Case Study Reader
 * **Mobile (< 768px)**: Single-column vertical stream with 16:9 proportional media.
-* **Tablet (768px – 1535px)**: Media embed spans full top width with 50/50 context & code columns beneath.
-* **Ultrawide (≥ 1536px)**: Full-bleed 3-column layout displaying Media, Problem/Methodology, and Code/Impact side-by-side.
+* **Tablet (768px – 1535px)**: Media embed spans full top width with 50/50 context & methodology columns beneath.
+* **Ultrawide (≥ 1536px)**: Full-bleed 3-column layout displaying Media, Context, and Code/Impact side-by-side.
 
-### 2. Defensive Documentation Galleries
-* Experience entries in `impact_records.html` support multi-image documentation via the `images` array (`url` and `caption`).
-* Automatically adapts from single-column banners to 2-column or 3-column grids with hover scaling and broken image error handling.
+### 2. Adaptive Documentation Galleries
+* Experience records support structured multi-image documentation via the images schema (url and caption).
+* Automatically adapts layouts from single banners to multi-column grids with hover scaling and image fallbacks.
 
-### 3. Integrated Headless CMS
-* Split-pane administrative UI managing `metrics`, `projects`, `experiences`, `education`, `skills`, and `articles`.
-* **Pattern A Image Serialization**: Converts line-delimited entries (`photo/path.jpg | Caption text`) directly into JSON objects on save.
-* Dual sync: Persists updates directly to the live VPS REST API via Bearer token authorization with LocalStorage and File System API fallbacks.
+### 3. Lightweight Client-Side Hydration
+* Decoupled frontend components that hydrate dynamically from structured JSON payloads.
+* Built-in error handling and offline fallback states to ensure high availability.
 
 ---
