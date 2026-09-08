@@ -28,12 +28,12 @@ h4,
 h5,
 h6,
 .font-syne,
-[class="font-syne"] {
-  line-height: 1.35 !important;
-  /* Prevents text from feeling squashed up and down */
-  letter-spacing: -0.01em;
-  font-feature-settings: "liga" 1,
-    "kern" 1;
+[class*="font-syne"] {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 700;
+  line-height: 1.25 !important;
+  letter-spacing: -0.015em !important; /* Tight, punchy, un-stretched */
+  font-feature-settings: "liga" 1, "kern" 1;
 }
 
 /* Allow badges and small text blocks natural vertical padding without clamping */

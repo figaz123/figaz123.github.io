@@ -5,13 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Study Reader — Figo Azzam De Fitrah Portfolio</title>
-    
+
     <!-- Google Fonts & FontAwesome CDN -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <!-- Tailwind CSS Engine CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -19,21 +21,22 @@
             theme: {
                 extend: {
                     colors: {
-                        navy: { 
-                            DEFAULT: '#1C3968', 
-                            dark: '#13284B', 
-                            light: '#254A85' 
+                        navy: {
+                            DEFAULT: '#1C3968',
+                            dark: '#13284B',
+                            light: '#254A85'
                         },
-                        orange: { 
-                            DEFAULT: '#F68F45', 
-                            dark: '#D97736', 
-                            glow: 'rgba(246, 143, 69, 0.2)' 
+                        orange: {
+                            DEFAULT: '#F68F45',
+                            dark: '#D97736',
+                            glow: 'rgba(246, 143, 69, 0.2)'
                         },
                         techblue: '#2563EB',
                         slatebg: '#F8FAFC'
                     },
                     fontFamily: {
-                        syne: ['Syne', 'sans-serif'],
+                        syne: ['Montserrat', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
                         inter: ['Inter', 'sans-serif'],
                         mono: ['DM Mono', 'monospace']
                     }
@@ -41,21 +44,23 @@
             }
         }
     </script>
-    
+
     <!-- Centralized Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="bg-slatebg text-slate-800 font-inter antialiased bg-grid-pattern min-h-screen flex flex-col justify-between">
+<body
+    class="bg-slatebg text-slate-800 font-inter antialiased bg-grid-pattern min-h-screen flex flex-col justify-between">
 
     <!-- DYNAMIC NAVIGATION HEADER (Injected by js/layout.js) -->
     <header id="site-header"></header>
 
     <!-- MAIN CONTENT CONTAINER -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-10">
-        
+    <main class="flex-1 w-full mx-auto px-4 sm:px-6 lg:px-10 2xl:px-16 py-8 md:py-12 space-y-10">
+
         <!-- Breadcrumb Navigation Bar -->
-        <nav class="flex items-center gap-2 text-xs font-mono text-slate-500 bg-white/80 p-3 rounded-xl border border-slate-200/80 shadow-sm">
+        <nav
+            class="flex items-center gap-2 text-xs font-mono text-slate-500 bg-white/80 p-3 rounded-xl border border-slate-200/80 shadow-sm">
             <a href="index.html" class="hover:text-orange transition-colors">Home</a>
             <i class="fa-solid fa-chevron-right text-[10px] opacity-40"></i>
             <a href="case_studies.html" class="hover:text-orange transition-colors">Case Studies</a>
@@ -63,14 +68,16 @@
             <span id="breadcrumb-title" class="text-navy font-semibold truncate">Loading Case Study...</span>
         </nav>
 
-        <!-- Dynamic Main Case Study Container -->
+        <!-- Dynamic Main Case Study Showcase Container -->
         <div id="active-case-study-container" class="space-y-8">
             <!-- Loading Skeleton Placeholder -->
-            <div class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 text-center space-y-4 shadow-sm animate-pulse">
+            <div
+                class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 text-center space-y-4 shadow-sm animate-pulse">
                 <div class="w-12 h-12 rounded-2xl bg-slate-200 mx-auto"></div>
                 <div class="h-6 bg-slate-200 rounded max-w-md mx-auto"></div>
                 <div class="h-4 bg-slate-100 rounded max-w-sm mx-auto"></div>
-                <div class="text-xs font-mono text-slate-400">Hydrating case study payload from portfolio data pipeline...</div>
+                <div class="text-xs font-mono text-slate-400">Hydrating case study payload from portfolio data
+                    pipeline...</div>
             </div>
         </div>
 
@@ -78,14 +85,16 @@
         <section class="pt-8 border-t border-slate-200/80 space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
-                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">// Exploration</span>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">//
+                        Exploration</span>
                     <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">More Business Case Studies</h2>
                 </div>
                 <span class="text-xs font-mono text-slate-500">Click any card below to deep dive</span>
             </div>
 
             <!-- Dynamic Related Projects Grid -->
-            <div id="related-projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- NOTE: Using gap-8 and md:grid-cols-2 lg:grid-cols-3 to match index.html grid spacing -->
+            <div id="related-projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Hydrated dynamically by JavaScript -->
             </div>
         </section>
@@ -96,7 +105,8 @@
     <footer id="site-footer"></footer>
 
     <!-- NOTIFICATION TOAST (Controlled by js/layout.js) -->
-    <div id="toast-msg" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white font-mono text-xs px-4 py-3 rounded-xl shadow-2xl border border-white/20 hidden flex items-center gap-2">
+    <div id="toast-msg"
+        class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white font-mono text-xs px-4 py-3 rounded-xl shadow-2xl border border-white/20 hidden flex items-center gap-2">
         <i class="fa-solid fa-circle-check text-emerald-400"></i>
         <span id="toast-text">Text copied!</span>
     </div>
@@ -143,9 +153,28 @@
             return clean;
         }
 
+        export function handleImageError(imgElement, embedUrl) {
+            if (isValidUrl(embedUrl)) {
+                const embedSrc = getEmbeddableUrl(embedUrl);
+                const parent = imgElement.parentElement;
+                if (parent) {
+                    parent.innerHTML = `
+                        <iframe src="${embedSrc}" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" class="w-full h-full border-0 object-cover" loading="lazy"></iframe>
+                        <div class="absolute bottom-3 right-3 bg-navy/90 backdrop-blur text-white text-[10px] font-mono px-2.5 py-1 rounded-md flex items-center gap-1.5 border border-white/10 shadow-sm pointer-events-none">
+                            <span class="w-1.5 h-1.5 rounded-full bg-orange animate-pulse"></span>
+                            <span>Interactive Preview</span>
+                        </div>
+                    `;
+                    return;
+                }
+            }
+            imgElement.onerror = null;
+            imgElement.src = FALLBACK_IMAGE_SVG;
+        }
+
         async function loadProjectsAndInitialize() {
             const data = await fetchPortfolioData();
-            
+
             allProjects = (data.projects || []).filter(
                 p => p && p.published !== 'draft' && p.published !== 'hidden' && p.published !== 'false' && p.published !== false
             );
@@ -177,10 +206,11 @@
             document.title = `${proj.title || 'Case Study'} — Figo Azzam Case Study`;
 
             const formattedDate = `${proj.month || ''} ${proj.year || ''}`.trim() || '2026';
-            
+
             // Resolve all potential link aliases (supporting camelCase & snake_case)
             const rawEmbedUrl = (proj.embedUrl || proj.embed_url || '').trim();
             const rawDashboardUrl = (proj.dashboardUrl || proj.dashboard_url || proj.lookerUrl || proj.looker_url || '').trim();
+            // const rawImagePath = (proj.dashboardUrl || proj.dashboard_url || proj.lookerUrl || proj.looker_url || '').trim();
             const rawImagePath = (proj.imagePath || proj.image_path || proj.coverImage || proj.cover_image || proj.image || '').trim();
             const artUrl = (proj.articleUrl || proj.article_url || '').trim();
             const gitUrl = (proj.githubUrl || proj.github_url || '').trim();
@@ -233,12 +263,12 @@
 
             // Build Tags HTML
             const tagsList = Array.isArray(proj.tags) ? proj.tags : (typeof proj.tags === 'string' ? proj.tags.split(',') : []);
-            const tagsHTML = tagsList.map(t => 
+            const tagsHTML = tagsList.map(t =>
                 `<span class="bg-navy/10 text-navy font-mono text-[11px] px-2.5 py-1 rounded-md font-medium border border-navy/10">[${t.trim()}]</span>`
             ).join(' ');
 
             let actionButtonsHTML = '';
-            
+
             // BUTTON 1: Google Drive Presentation / Files
             if (isValidUrl(driveUrl)) {
                 actionButtonsHTML += `
@@ -319,8 +349,8 @@
             }
 
             container.innerHTML = `
-                <!-- Case Study Header Banner -->
-                <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+                <!-- Case Study Header Banner (Fluid Full-Width) -->
+                <div class="w-full bg-white rounded-3xl p-6 sm:p-8 xl:p-10 border border-slate-200 shadow-sm space-y-6">
                     <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
                         <div class="flex items-center gap-2">
                             <span class="px-3 py-1 rounded-full bg-orange/10 border border-orange/30 text-orange font-mono text-xs font-bold uppercase tracking-wider">${proj.category || 'Analytics'}</span>
@@ -329,13 +359,13 @@
                         <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800">🟢 Live Project</span>
                     </div>
 
-                    <div class="space-y-3">
-                        <h1 class="font-syne font-extrabold text-2xl sm:text-4xl text-navy leading-tight">${proj.title}</h1>
-                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">${proj.description || ''}</p>
+                    <div class="space-y-3 max-w-5xl">
+                        <h1 class="font-syne font-extrabold text-2xl sm:text-4xl xl:text-5xl text-navy leading-tight">${proj.title}</h1>
+                        <p class="text-slate-600 text-sm sm:text-base xl:text-lg leading-relaxed">${proj.description || ''}</p>
                     </div>
 
-                    <!-- Two Main Action Buttons Bar -->
-                    <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <!-- Action Buttons Bar (Responsive Wrap on Mobile) -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
                         <div class="flex flex-wrap gap-2">
                             ${tagsHTML}
                         </div>
@@ -346,31 +376,23 @@
                 </div>
 
                 <!-- Deep Dive Content Breakdown Grid -->
-                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6 xl:gap-8 items-start w-full">
                     
-                    <!-- Left Column: Top Media & ROI Impact -->
-                    <div class="lg:col-span-7 space-y-6">
+                    <!-- COLUMN 1: Top Media & Presentation Embed
+                         - Mobile: 1-col full width
+                         - Tablet: Spans full width across top row (md:col-span-2)
+                         - Ultrawide: Left column (2xl:col-span-1) -->
+                    <div class="min-w-0 w-full md:col-span-2 2xl:col-span-1 space-y-6">
                         ${topMediaHTML}
-
-                        <!-- Quick Links Access Card -->
-
-
-                        <!-- ROI Impact Highlight Card with Markdown -->
-                        <div class="bg-gradient-to-br from-emerald-900 to-navy text-white p-6 rounded-2xl border border-emerald-500/30 shadow-lg space-y-2">
-                            <div class="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
-                                <i class="fa-solid fa-trophy"></i>
-                                <span>Measurable ROI & Commercial Impact</span>
-                            </div>
-                            <div class="text-sm sm:text-base text-emerald-100 leading-relaxed font-medium">
-                                ${renderMarkdown(proj.impact, 'Delivered data-driven decision optimization.', 'emerald')}
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- Right Column: Business Context & Code Snippet -->
-                    <div class="lg:col-span-5 space-y-6">
+                    <!-- COLUMN 2: Business Context & Pipeline Methodology
+                         - Mobile: 1-col stacked
+                         - Tablet: Left-half underneath the media (md:col-span-1)
+                         - Ultrawide: Center column (2xl:col-span-1) -->
+                    <div class="min-w-0 w-full md:col-span-1 2xl:col-span-1 space-y-6">
                         
-                        <!-- Business Problem Statement with Markdown -->
+                        <!-- Business Problem Statement -->
                         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
                             <h3 class="font-syne font-bold text-navy text-sm uppercase tracking-wider flex items-center gap-2">
                                 <i class="fa-solid fa-triangle-exclamation text-orange"></i>
@@ -381,7 +403,7 @@
                             </div>
                         </div>
 
-                        <!-- Technical Methodology with Markdown -->
+                        <!-- Technical Methodology -->
                         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-2">
                             <h3 class="font-syne font-bold text-navy text-sm uppercase tracking-wider flex items-center gap-2">
                                 <i class="fa-solid fa-diagram-project text-techblue"></i>
@@ -392,6 +414,14 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <!-- COLUMN 3: Code Snippet & ROI Impact Card
+                         - Mobile: 1-col stacked
+                         - Tablet: Right-half underneath the media (md:col-span-1)
+                         - Ultrawide: Right column (2xl:col-span-1) -->
+                    <div class="min-w-0 w-full md:col-span-1 2xl:col-span-1 space-y-6">
+                        
                         <!-- Code Transformation Snippet -->
                         <div class="bg-slate-950 p-6 rounded-2xl border border-white/10 shadow-md space-y-3">
                             <div class="flex items-center justify-between">
@@ -402,7 +432,18 @@
                                     <i class="fa-solid fa-copy"></i> Copy
                                 </button>
                             </div>
-                            <pre class="code-snippet p-4 rounded-xl text-[11px] overflow-x-auto max-h-64 border border-white/10"><code id="code-snippet-block">${escapeHtml(proj.codeSnippet || proj.code_snippet || '-- Query or model code snippet')}</code></pre>
+                            <pre class="code-snippet p-4 rounded-xl text-[11px] overflow-x-auto max-h-64 border border-white/10 w-full"><code id="code-snippet-block">${escapeHtml(proj.codeSnippet || proj.code_snippet || '-- Query or model code snippet')}</code></pre>
+                        </div>
+
+                        <!-- ROI Impact Highlight Card -->
+                        <div class="bg-gradient-to-br from-emerald-900 to-navy text-white p-6 rounded-2xl border border-emerald-500/30 shadow-lg space-y-2">
+                            <div class="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
+                                <i class="fa-solid fa-trophy"></i>
+                                <span>Measurable ROI & Commercial Impact</span>
+                            </div>
+                            <div class="text-sm sm:text-base text-emerald-100 leading-relaxed font-medium">
+                                ${renderMarkdown(proj.impact, 'Delivered data-driven decision optimization.', 'emerald')}
+                            </div>
                         </div>
 
                     </div>
@@ -417,40 +458,114 @@
             const otherProjects = allProjects.filter(p => String(p.id) !== String(activeProjectId));
 
             if (otherProjects.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center text-slate-400 py-6 font-mono text-xs">No additional case studies found.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center text-slate-400 py-12 font-mono text-xs">No additional case studies found.</div>`;
                 return;
             }
 
             container.innerHTML = otherProjects.map(proj => {
                 const formattedDate = `${proj.month || ''} ${proj.year || ''}`.trim() || '2026';
                 const rawImagePath = (proj.imagePath || proj.image_path || proj.coverImage || proj.cover_image || proj.image || '').trim();
-                const isActualImg = rawImagePath && (
-                    rawImagePath.match(/\.(png|jpg|jpeg|webp|svg|gif|avif)(\?.*)?$/i) ||
-                    rawImagePath.startsWith('assets/') ||
-                    rawImagePath.startsWith('images/') ||
-                    rawImagePath.startsWith('./')
-                );
-                const imgSrc = isActualImg ? rawImagePath : FALLBACK_IMAGE_SVG;
+                const embedUrl = (proj.embedUrl || proj.embed_url || '').trim();
+                const directDashUrl = proj.dashboardUrl || proj.dashboard_url || embedUrl || proj.link || '';
+                const hasLiveDash = isValidUrl(directDashUrl);
+
+                // Determine dynamic preview badge label matching index.html
+                let badgeLabel = "Analytics Study";
+                if (embedUrl.includes('lookerstudio') || embedUrl.includes('datastudio') || proj.mediaType === 'looker') {
+                    badgeLabel = "Looker Studio";
+                } else if (embedUrl.includes('drive.google.com') || proj.mediaType === 'iframe') {
+                    badgeLabel = "Google Drive Deck";
+                } else if (proj.mediaType === 'tableau') {
+                    badgeLabel = "Tableau Dashboard";
+                }
+
+                // Render rich media preview (iframe or image with interactive fallback)
+                let mediaMarkup = '';
+                if ((proj.mediaType === 'iframe' || embedUrl.includes('drive.google.com')) && !rawImagePath) {
+                    const embedSrc = getEmbeddableUrl(embedUrl);
+                    mediaMarkup = `
+                        <iframe src="${embedSrc}" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" class="w-full h-full border-0 object-cover" title="${proj.title}" loading="lazy"></iframe>
+                        <div class="absolute bottom-3 right-3 bg-navy/90 backdrop-blur text-white text-[10px] font-mono px-2.5 py-1 rounded-md flex items-center gap-1.5 border border-white/10 shadow-sm pointer-events-none">
+                            <span class="w-1.5 h-1.5 rounded-full bg-orange animate-pulse"></span>
+                            <span>${badgeLabel}</span>
+                        </div>
+                    `;
+                } else {
+                    const isActualImg = rawImagePath && (
+                        rawImagePath.match(/\.(png|jpg|jpeg|webp|svg|gif|avif)(\?.*)?$/i) ||
+                        rawImagePath.startsWith('assets/') ||
+                        rawImagePath.startsWith('images/') ||
+                        rawImagePath.startsWith('photo/') ||
+                        rawImagePath.startsWith('./')
+                    );
+                    const imgSrc = isActualImg ? rawImagePath : (embedUrl ? '' : FALLBACK_IMAGE_SVG);
+                    const safeEmbedUrl = encodeURIComponent(embedUrl);
+
+                    if (!imgSrc && embedUrl) {
+                        const embedSrc = getEmbeddableUrl(embedUrl);
+                        mediaMarkup = `
+                            <iframe src="${embedSrc}" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" class="w-full h-full border-0 object-cover" title="${proj.title}" loading="lazy"></iframe>
+                            <div class="absolute bottom-3 right-3 bg-navy/90 backdrop-blur text-white text-[10px] font-mono px-2.5 py-1 rounded-md flex items-center gap-1.5 border border-white/10 shadow-sm pointer-events-none">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange animate-pulse"></span>
+                                <span>${badgeLabel}</span>
+                            </div>
+                        `;
+                    } else {
+                        mediaMarkup = `
+                            <img src="${imgSrc || FALLBACK_IMAGE_SVG}" alt="${proj.title}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300" onerror="window.handleImageError(this, decodeURIComponent('${safeEmbedUrl}'))">
+                            <div class="absolute bottom-3 right-3 bg-navy/90 backdrop-blur text-white text-[10px] font-mono px-2.5 py-1 rounded-md flex items-center gap-1.5 border border-white/10 shadow-sm pointer-events-none">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange animate-pulse"></span>
+                                <span>${badgeLabel}</span>
+                            </div>
+                        `;
+                    }
+                }
+
+                // Render technology tag pills
+                const tagsList = Array.isArray(proj.tags) ? proj.tags : (typeof proj.tags === 'string' ? proj.tags.split(',') : []);
+                const tagsMarkup = tagsList.map(tag => {
+                    return `<span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-mono text-[11px]">[${tag.trim()}]</span>`;
+                }).join(' ');
+
+                // Optional outbound link to live deck / dashboard
+                let cardLinksHTML = '';
+                if (hasLiveDash) {
+                    cardLinksHTML += `
+                        <a href="${directDashUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="w-full bg-slate-100 hover:bg-slate-200 text-navy text-xs font-semibold py-2 rounded-xl transition-colors flex items-center justify-center gap-2 border border-slate-200/80">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-orange"></i>
+                            <span>Direct Dashboard / Deck Link</span>
+                        </a>
+                    `;
+                }
 
                 return `
-                    <article onclick="window.switchCaseStudy('${proj.id}')" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-orange/50 transition-all cursor-pointer group flex flex-col justify-between">
+                    <article onclick="window.switchCaseStudy('${proj.id}')" class="project-card bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-orange/50 transition-all cursor-pointer group">
                         <div>
                             <div class="aspect-video bg-navy relative overflow-hidden">
-                                <img src="${imgSrc}" alt="${proj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90 group-hover:opacity-100" onerror="this.src='${FALLBACK_IMAGE_SVG}'">
-                                <div class="absolute top-3 left-3 bg-navy/90 text-orange font-mono text-[10px] px-2 py-0.5 rounded border border-orange/30">${formattedDate}</div>
+                                ${mediaMarkup}
+                                <div class="absolute top-3 left-3 bg-navy/90 text-orange font-mono text-xs px-2.5 py-1 rounded-md border border-orange/30">${formattedDate}</div>
                             </div>
-                            <div class="p-5 space-y-2">
-                                <span class="text-[10px] font-mono text-orange font-bold uppercase">${proj.category || 'Analytics'}</span>
-                                <h3 class="font-syne font-bold text-base text-navy group-hover:text-orange transition-colors line-clamp-2">${proj.title}</h3>
-                                <p class="text-xs text-slate-600 line-clamp-2">${proj.description || ''}</p>
+
+                            <div class="p-6 space-y-4">
+                                <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                                    ${tagsMarkup}
+                                </div>
+
+                                <div>
+                                    <span class="text-[10px] font-mono text-orange font-bold uppercase tracking-wider block mb-1">${proj.category || 'Analytics'}</span>
+                                    <h3 class="font-syne font-bold text-xl text-navy group-hover:text-orange transition-colors">${proj.title}</h3>
+                                </div>
+                                
+
                             </div>
                         </div>
 
-                        <div class="p-5 pt-0">
-                            <div class="w-full bg-slate-100 group-hover:bg-navy group-hover:text-white text-navy text-xs font-semibold py-2 rounded-xl transition-colors flex items-center justify-center gap-2 border border-slate-200">
+                        <div class="p-6 pt-0 space-y-2">
+                            <div class="w-full bg-navy group-hover:bg-orange text-white text-xs font-semibold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-book-open text-xs"></i>
                                 <span>Read Case Study</span>
-                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </div>
+                            ${cardLinksHTML}
                         </div>
                     </article>
                 `;
@@ -483,6 +598,8 @@
 
         window.switchCaseStudy = switchCaseStudy;
         window.copyCodeSnippet = copyCodeSnippet;
+        window.handleImageError = handleImageError;
     </script>
 </body>
+
 </html>
