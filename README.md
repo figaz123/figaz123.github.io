@@ -21,7 +21,6 @@ Personal portfolio website of mine. Showcasing end-to-end data analytics, machin
 ├── articles.html              # Technical notes reader with built-in markdown parser
 ├── impact_records.html        # Career milestones, documentation galleries, & skills
 ├── contact.html               # Direct inquiry dispatch form and social channels
-├── portfolio.json             # Central schema for metrics, projects, and experiences
 │
 ├── css/
 │   └── style.css              # Global design system, typography, and prose formatting
