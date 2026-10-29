@@ -7,7 +7,6 @@
 // 1. API Configuration & Constants
 // --------------------------------------------------------------------------
 export const API_CONFIG = {
-  // Primary and exclusive remote database endpoint
   vpsEndpoint: "https://figo-portfolio.duckdns.org/api/portfolio",
   storageKey: "figo_portfolio_cms_store",
   requestTimeoutMs: 5000 // 5-second network timeout
@@ -51,7 +50,7 @@ export const DEFAULT_METRICS = [
   }
 ];
 
-// Default Fallback Datasets (In-Memory Safe State)
+
 export const DEFAULT_PROJECTS = [
   {
     id: "oca-segmentation",
@@ -121,6 +120,20 @@ export const DEFAULT_PROJECTS = [
   }
 ];
 
+export const DEFAULT_CERTIFICATIONS = [
+  {
+    id: "cert-gda",
+    published: "publish",
+    title: "Google Data Analytics Professional Certificate",
+    issuer: "Google / Coursera",
+    date: "2024",
+    credentialId: "GDA-2024-8891",
+    credentialUrl: "https://coursera.org",
+    skills: "SQL, Spreadsheets, Tableau, R, Data Cleaning",
+    description: "Comprehensive hands-on curriculum covering the full data analysis lifecycle, exploratory data analysis, and dashboard communication."
+  }
+];
+
 export const DEFAULT_ARTICLES = [
   {
     id: "hydroponics-pipeline",
@@ -145,10 +158,12 @@ export function normalizePortfolioPayload(rawPayload) {
   if (!rawPayload) {
     return {
       meta: {},
+      metrics: DEFAULT_METRICS,
       projects: DEFAULT_PROJECTS,
       articles: DEFAULT_ARTICLES,
       experiences: [],
       education: [],
+      certifications: DEFAULT_CERTIFICATIONS || [],
       skills: []
     };
   }
@@ -161,9 +176,11 @@ export function normalizePortfolioPayload(rawPayload) {
     articles: Array.isArray(root.articles) ? root.articles : DEFAULT_ARTICLES,
     experiences: Array.isArray(root.experiences) ? root.experiences : [],
     education: Array.isArray(root.education) ? root.education : [],
+    certifications: Array.isArray(root.certifications) ? root.certifications : (DEFAULT_CERTIFICATIONS || []),
     skills: Array.isArray(root.skills) ? root.skills : []
   };
 }
+
 
 // --------------------------------------------------------------------------
 // 3. Direct VPS API Fetch Pipeline
@@ -250,6 +267,12 @@ export async function getArticles() {
   return data.articles.filter(a => a.published === "publish");
 }
 
+export async function getCertifications() {
+  const data = await fetchPortfolioData();
+  if (!data || !Array.isArray(data.certifications)) return [];
+  return data.certifications.filter(c => c.published === "publish");
+}
+
 export async function getPortfolioMeta() {
   const data = await fetchPortfolioData();
   return data.meta || {};
@@ -290,6 +313,7 @@ if (typeof window !== "undefined") {
     getExperiences,
     getSkills,
     getArticles,
+    getCertifications,
     getPortfolioMeta,
     savePortfolioData
   };

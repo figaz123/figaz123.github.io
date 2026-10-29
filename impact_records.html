@@ -13,7 +13,15 @@
         href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6LS22EP7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
+        gtag('config', 'G-Y6LS22EP7T');
+    </script>
     <!-- Tailwind CSS Engine CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -110,13 +118,13 @@
             </div>
         </section>
 
-        <!-- SECTION 2: EDUCATION & CERTIFICATIONS -->
+        <!-- SECTION 2: EDUCATION -->
         <section class="space-y-6 pt-6">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
                 <div>
                     <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">// Academic
                         Background</span>
-                    <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">Education & Certifications</h2>
+                    <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">Education</h2>
                 </div>
             </div>
 
@@ -130,8 +138,29 @@
                 </div>
             </div>
         </section>
+        <!-- SECTION 3: CERTIFICATIONS & LICENSES -->
+        <section class="space-y-6 pt-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+                <div>
+                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-widest">// Verified
+                        Credentials</span>
+                    <h2 class="font-syne text-2xl sm:text-3xl font-bold text-navy mt-1">Certifications & Licenses</h2>
+                </div>
+                <span class="text-xs font-mono text-slate-500">Industry & Specialized Accreditations</span>
+            </div>
 
-        <!-- SECTION 3: TECHNICAL SKILLS & ARSENAL -->
+            <!-- Dynamic Certifications Grid -->
+            <div id="certifications-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Skeleton Loader -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm animate-pulse space-y-3">
+                    <div class="h-5 bg-slate-200 rounded w-1/2"></div>
+                    <div class="h-4 bg-slate-100 rounded w-1/3"></div>
+                    <div class="h-16 bg-slate-100 rounded"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: TECHNICAL SKILLS & ARSENAL -->
         <section class="space-y-6 pt-6">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
                 <div>
@@ -165,7 +194,7 @@
 
     <!-- MODULAR CLIENT ENGINE SCRIPT -->
     <script type="module">
-        import { fetchPortfolioData } from './js/api.js';
+        import { fetchPortfolioData, isValidUrl } from './js/api.js';
         import { renderHeader, renderFooter } from './js/layout.js';
 
         // --------------------------------------------------------------------------
@@ -174,6 +203,7 @@
         let portfolioData = {
             experiences: [],
             education: [],
+            certifications: [],
             skills: []
         };
 
@@ -196,17 +226,21 @@
 
             portfolioData.experiences = filterPublished(data.experiences);
             portfolioData.education = filterPublished(data.education);
+            portfolioData.certifications = filterPublished(data.certifications); // <-- ADD THIS LINE
             portfolioData.skills = filterPublished(data.skills);
 
             renderExperiences();
             renderEducation();
+            renderCertifications();
             renderSkills();
         }
 
         function filterPublished(arr) {
-            return (arr || []).filter(item =>
-                item && item.published !== 'draft' && item.published !== 'hidden' && item.published !== 'false'
-            );
+            return (arr || []).filter(item => {
+                if (!item) return false;
+                const status = String(item.published ?? 'publish').toLowerCase().trim();
+                return status !== 'draft' && status !== 'hidden' && status !== 'false' && status !== '0';
+            });
         }
 
         // --------------------------------------------------------------------------
@@ -227,7 +261,7 @@
                 const date = exp.period || exp.date || "2024";
                 const location = exp.location || "Indonesia";
                 const description = exp.description || exp.companyDescription || "";
-                
+
                 const tasksList = exp.tasks || exp.bullets || [];
                 const tasksHTML = tasksList.map(task => `
                     <li class="flex items-start gap-2.5 text-xs text-slate-700 leading-relaxed">
@@ -330,6 +364,70 @@
                         </div>
                         ${edu.score ? `<div class="inline-block font-mono text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded">${edu.score}</div>` : ''}
                         <p class="text-xs text-slate-600 leading-relaxed">${edu.description || ''}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+        function renderCertifications() {
+            const container = document.getElementById('certifications-container');
+            if (!container) return;
+
+            if (portfolioData.certifications.length === 0) {
+                container.innerHTML = `<div class="col-span-full bg-white p-6 rounded-2xl text-center text-slate-400 font-mono text-xs">No certifications found.</div>`;
+                return;
+            }
+
+            container.innerHTML = portfolioData.certifications.map(cert => {
+                const rawSkills = cert.skills || '';
+                const skillsList = Array.isArray(rawSkills)
+                    ? rawSkills
+                    : rawSkills.split(',').map(s => s.trim()).filter(Boolean);
+
+                /* HINT: Safe URL check preventing reference errors */
+                const hasVerifyLink = typeof isValidUrl === 'function'
+                    ? isValidUrl(cert.credentialUrl)
+                    : Boolean(cert.credentialUrl && String(cert.credentialUrl).trim() !== '' && String(cert.credentialUrl).trim() !== '#');
+
+                return `
+                    <div class="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-sm space-y-4 flex flex-col justify-between hover:shadow-md transition-shadow">
+                        <div class="space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <div>
+                                    <span class="font-mono text-xs text-orange font-bold uppercase tracking-wider">${cert.issuer || 'Issuer'}</span>
+                                    <h3 class="font-syne font-bold text-base text-navy mt-0.5 leading-snug">${cert.title || 'Certification Title'}</h3>
+                                </div>
+                                <span class="font-mono text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded shrink-0">${cert.date || ''}</span>
+                            </div>
+
+                            ${cert.credentialId ? `
+                                <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-[10px] border border-slate-200/60">
+                                    <i class="fa-solid fa-id-badge text-orange"></i>
+                                    <span>ID: ${cert.credentialId}</span>
+                                </div>
+                            ` : ''}
+
+                            ${cert.description ? `
+                                <p class="text-xs text-slate-600 leading-relaxed">${cert.description}</p>
+                            ` : ''}
+
+                            ${skillsList.length > 0 ? `
+                                <div class="flex flex-wrap gap-1.5 pt-1">
+                                    ${skillsList.map(s => `
+                                        <span class="bg-navy/5 text-navy font-mono text-[10px] px-2 py-0.5 rounded border border-navy/10 font-medium">[${s}]</span>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        ${hasVerifyLink ? `
+                            <div class="pt-3 border-t border-slate-100">
+                                <a href="${cert.credentialUrl}" target="_blank" rel="noopener noreferrer" 
+                                   class="text-xs font-mono text-navy hover:text-orange transition-colors inline-flex items-center gap-1.5 font-semibold group">
+                                    <span>Verify Credential</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-orange group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                                </a>
+                            </div>
+                        ` : ''}
                     </div>
                 `;
             }).join('');

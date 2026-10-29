@@ -97,7 +97,11 @@ export function renderHeader(activePage = 'home') {
 
         <!-- Desktop Navigation Menu -->
         <nav class="hidden md:flex items-center space-x-6 font-medium text-sm text-white">
-            <a href="case_studies.html" class="${activePage === 'case_studies' ? 'text-orange font-bold' : 'hover:text-orange'} transition-colors flex items-center gap-1.5" title="View Business Case Studies">
+        <a href="index.html" class="${activePage === 'home' ? 'text-orange font-bold' : 'hover:text-orange'} transition-colors flex items-center gap-1.5" title="View Business Case Studies">
+                <i class="fa-solid fa-home text-xs ${activePage === 'home' ? 'text-orange' : 'opacity-70'}"></i>
+                <span>Home</span>
+            </a>    
+        <a href="case_studies.html" class="${activePage === 'case_studies' ? 'text-orange font-bold' : 'hover:text-orange'} transition-colors flex items-center gap-1.5" title="View Business Case Studies">
                 <i class="fa-solid fa-chart-pie text-xs ${activePage === 'case_studies' ? 'text-orange' : 'opacity-70'}"></i>
                 <span>Case Studies</span>
             </a>
